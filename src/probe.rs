@@ -24,6 +24,7 @@ use std::path::Path;
 #[derive(Copy, Clone, Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[non_exhaustive]
 pub struct ParseOptions {
+	pub(crate) read_picture: bool,
 	pub(crate) read_properties: bool,
 	pub(crate) use_custom_resolvers: bool,
 	pub(crate) parsing_mode: ParsingMode,
@@ -73,12 +74,28 @@ impl ParseOptions {
 	#[must_use]
 	pub const fn new() -> Self {
 		Self {
+			read_picture: true,
 			read_properties: true,
 			use_custom_resolvers: true,
 			parsing_mode: Self::DEFAULT_PARSING_MODE,
 			max_junk_bytes: Self::DEFAULT_MAX_JUNK_BYTES,
 			allocation_limit: Self::DEFAULT_ALLOCATION_LIMIT,
 		}
+	}
+
+	/// Whether or not to read the picture
+	///
+	/// # Examples
+	///
+	/// ```rust
+	/// use lofty::ParseOptions;
+	///
+	/// // By default, `read_picture` is enabled. Here, we don't want to read them.
+	/// let parsing_options = ParseOptions::new().read_picture(false);
+	/// ```
+	pub fn read_picture(&mut self, read_picture: bool) -> Self {
+		self.read_picture = read_picture;
+		*self
 	}
 
 	/// Whether or not to read the audio properties

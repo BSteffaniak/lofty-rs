@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::macros::try_vec;
 
-use std::io::{Read, Seek};
+use std::io::{Read, Seek, SeekFrom};
 
 use byteorder::{BigEndian, ReadBytesExt};
 
@@ -21,7 +21,7 @@ pub(crate) struct Block {
 }
 
 impl Block {
-	pub(crate) fn read<R>(data: &mut R) -> Result<Self>
+	pub(crate) fn read<R>(data: &mut R, read_picture: bool) -> Result<Self>
 	where
 		R: Read + Seek,
 	{
@@ -33,8 +33,14 @@ impl Block {
 
 		let size = data.read_u24::<BigEndian>()?;
 
-		let mut content = try_vec![0; size as usize];
-		data.read_exact(&mut content)?;
+		let content = if ty == BLOCK_ID_PICTURE && !read_picture {
+			data.seek(SeekFrom::Current(size.into()))?;
+			vec![]
+		} else {
+			let mut content = try_vec![0; size as usize];
+			data.read_exact(&mut content)?;
+			content
+		};
 
 		let end = data.stream_position()?;
 

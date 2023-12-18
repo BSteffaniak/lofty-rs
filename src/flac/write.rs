@@ -61,7 +61,7 @@ where
 	let mut blocks_remove = Vec::new();
 
 	while !last_block {
-		let block = Block::read(&mut cursor)?;
+		let block = Block::read(&mut cursor, true)?;
 		let start = block.start;
 		let end = block.end;
 

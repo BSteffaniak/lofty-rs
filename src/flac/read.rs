@@ -26,7 +26,7 @@ where
 		decode_err!(@BAIL Flac, "File missing \"fLaC\" stream marker");
 	}
 
-	let block = Block::read(data)?;
+	let block = Block::read(data, true)?;
 
 	if block.ty != BLOCK_ID_STREAMINFO {
 		decode_err!(@BAIL Flac, "File missing mandatory STREAMINFO block");
@@ -64,11 +64,12 @@ where
 	let mut last_block = stream_info.last;
 
 	while !last_block {
-		let block = Block::read(data)?;
+		let block = Block::read(data, parse_options.read_picture)?;
 		last_block = block.last;
 
 		if block.content.is_empty()
 			&& (block.ty != BLOCK_ID_PADDING && block.ty != BLOCK_ID_SEEKTABLE)
+			&& (block.ty != BLOCK_ID_PICTURE || parse_options.read_picture)
 		{
 			decode_err!(@BAIL Flac, "Encountered a zero-sized metadata block");
 		}
@@ -99,7 +100,7 @@ where
 			continue;
 		}
 
-		if block.ty == BLOCK_ID_PICTURE {
+		if block.ty == BLOCK_ID_PICTURE && parse_options.read_picture {
 			match Picture::from_flac_bytes(&block.content, false, parse_options.parsing_mode) {
 				Ok(picture) => flac_file.pictures.push(picture),
 				Err(e) => {
