@@ -1,0 +1,45 @@
+name: Benchmark
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'benches/**'
+      - 'ogg_pager/**'
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Benchmark
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: nightly
+
+      - name: Run benchmark
+        env:
+          RUSTFLAGS: '--cfg bench'
+        run: |
+          cargo bench --all-features -- --output-format bencher | tee output.txt
+
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'cargo'
+          # Where the output from the benchmark tool is stored
+          output-file-path: output.txt
+          # Show alert with commit comment on detecting possible performance regression
+          alert-threshold: '200%'
+          # Workflow will fail when an alert happens
+          fail-on-alert: true
+          # GitHub API token to make a commit comment
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Enable alert commit comment
+          comment-on-alert: true
+          auto-push: true

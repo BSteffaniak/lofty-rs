@@ -1,0 +1,186 @@
+use super::header::{cmp_header, search_for_frame_sync, Header, HeaderCmpResult, XingHeader};
+use super::{MpegFile, MpegProperties};
+use crate::ape::header::read_ape_header;
+use crate::error::Result;
+use crate::id3::v2::header::Id3v2Header;
+use crate::id3::v2::read::parse_id3v2;
+use crate::id3::{find_id3v1, find_lyrics3v2, ID3FindResults};
+use crate::macros::{decode_err, err};
+use crate::mpeg::header::HEADER_MASK;
+use crate::probe::ParseOptions;
+
+use std::io::{Read, Seek, SeekFrom};
+
+use byteorder::{BigEndian, ReadBytesExt};
+
+pub(super) fn read_from<R>(reader: &mut R, parse_options: ParseOptions) -> Result<MpegFile>
+where
+	R: Read + Seek,
+{
+	let mut file = MpegFile::default();
+
+	let mut first_frame_offset = 0;
+	let mut first_frame_header = None;
+
+	// Skip any invalid padding
+	while reader.read_u8()? == 0 {}
+
+	reader.seek(SeekFrom::Current(-1))?;
+
+	let mut header = [0; 4];
+
+	while let Ok(()) = reader.read_exact(&mut header) {
+		match header {
+			// [I, D, 3, ver_major, ver_minor, flags, size (4 bytes)]
+			[b'I', b'D', b'3', ..] => {
+				// Seek back to read the tag in full
+				reader.seek(SeekFrom::Current(-4))?;
+
+				let header = Id3v2Header::parse(reader)?;
+				let skip_footer = header.flags.footer;
+
+				let id3v2 = parse_id3v2(reader, header, parse_options.parsing_mode)?;
+				if let Some(existing_tag) = &mut file.id3v2_tag {
+					// https://github.com/Serial-ATA/lofty-rs/issues/87
+					// Duplicate tags should have their frames appended to the previous
+					for frame in id3v2.frames {
+						existing_tag.insert(frame);
+					}
+					continue;
+				}
+				file.id3v2_tag = Some(id3v2);
+
+				// Skip over the footer
+				if skip_footer {
+					reader.seek(SeekFrom::Current(10))?;
+				}
+
+				continue;
+			},
+			[b'A', b'P', b'E', b'T'] => {
+				let mut header_remaining = [0; 4];
+				reader.read_exact(&mut header_remaining)?;
+
+				if &header_remaining == b"AGEX" {
+					let ape_header = read_ape_header(reader, false)?;
+
+					file.ape_tag = Some(crate::ape::tag::read::read_ape_tag_with_header(
+						reader, ape_header,
+					)?);
+
+					continue;
+				}
+
+				err!(FakeTag);
+			},
+			// Tags might be followed by junk bytes before the first MP3 frame begins
+			_ => {
+				// Seek back the length of the temporary header buffer, to include them
+				// in the frame sync search
+				#[allow(clippy::neg_multiply)]
+				reader.seek(SeekFrom::Current(-1 * header.len() as i64))?;
+
+				#[allow(clippy::used_underscore_binding)]
+				if let Some((_first_first_header, _first_frame_offset)) = find_next_frame(reader)? {
+					first_frame_offset = _first_frame_offset;
+					first_frame_header = Some(_first_first_header);
+					break;
+				}
+			},
+		}
+	}
+
+	#[allow(unused_variables)]
+	let ID3FindResults(header, id3v1) = find_id3v1(reader, true)?;
+
+	if header.is_some() {
+		file.id3v1_tag = id3v1;
+	}
+
+	let _ = find_lyrics3v2(reader)?;
+
+	reader.seek(SeekFrom::Current(-32))?;
+
+	match crate::ape::tag::read::read_ape_tag(reader, true)? {
+		Some((tag, header)) => {
+			file.ape_tag = Some(tag);
+
+			// Seek back to the start of the tag
+			let pos = reader.stream_position()?;
+			reader.seek(SeekFrom::Start(pos - u64::from(header.size)))?;
+		},
+		None => {
+			// Correct the position (APE header - Preamble)
+			reader.seek(SeekFrom::Current(24))?;
+		},
+	}
+
+	let last_frame_offset = reader.stream_position()?;
+	file.properties = MpegProperties::default();
+
+	if parse_options.read_properties {
+		let first_frame_header = match first_frame_header {
+			Some(header) => header,
+			// The search for sync bits was unsuccessful
+			None => decode_err!(@BAIL Mpeg, "File contains an invalid frame"),
+		};
+
+		if first_frame_header.sample_rate == 0 {
+			decode_err!(@BAIL Mpeg, "Sample rate is 0");
+		}
+
+		let first_frame_offset = first_frame_offset;
+
+		// Try to read a Xing header
+		let xing_header_location = first_frame_offset + u64::from(first_frame_header.data_start);
+		reader.seek(SeekFrom::Start(xing_header_location))?;
+
+		let mut xing_reader = [0; 32];
+		reader.read_exact(&mut xing_reader)?;
+
+		let xing_header = XingHeader::read(&mut &xing_reader[..])?;
+
+		let file_length = reader.seek(SeekFrom::End(0))?;
+
+		super::properties::read_properties(
+			&mut file.properties,
+			reader,
+			(first_frame_header, first_frame_offset),
+			last_frame_offset,
+			xing_header,
+			file_length,
+		)?;
+	}
+
+	Ok(file)
+}
+
+// Searches for the next frame, comparing it to the following one
+fn find_next_frame<R>(reader: &mut R) -> Result<Option<(Header, u64)>>
+where
+	R: Read + Seek,
+{
+	let mut pos = reader.stream_position()?;
+
+	while let Ok(Some(first_mp3_frame_start_relative)) = search_for_frame_sync(reader) {
+		let first_mp3_frame_start_absolute = pos + first_mp3_frame_start_relative;
+
+		// Seek back to the start of the frame and read the header
+		reader.seek(SeekFrom::Start(first_mp3_frame_start_absolute))?;
+		let first_header_data = reader.read_u32::<BigEndian>()?;
+
+		if let Some(first_header) = Header::read(first_header_data) {
+			match cmp_header(reader, 4, first_header.len, first_header_data, HEADER_MASK) {
+				HeaderCmpResult::Equal => {
+					return Ok(Some((first_header, first_mp3_frame_start_absolute)))
+				},
+				HeaderCmpResult::Undetermined => return Ok(None),
+				HeaderCmpResult::NotEqual => {},
+			}
+		}
+
+		pos = reader.stream_position()?;
+	}
+
+	Ok(None)
+}
