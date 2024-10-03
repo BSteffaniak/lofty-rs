@@ -1,4 +1,4 @@
-use lofty::PictureInformation;
+use moosicbox_lofty::PictureInformation;
 
 use std::fs::File;
 use std::io::Read;

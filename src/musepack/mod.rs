@@ -10,7 +10,7 @@ use crate::id3::v1::tag::Id3v1Tag;
 use crate::id3::v2::tag::Id3v2Tag;
 use crate::properties::FileProperties;
 
-use lofty_attr::LoftyFile;
+use moosicbox_lofty_attr::LoftyFile;
 
 /// Audio properties of an MPC file
 ///
@@ -55,19 +55,19 @@ pub enum MpcStreamVersion {
 
 /// An MPC file
 #[derive(LoftyFile, Default)]
-#[lofty(read_fn = "read::read_from")]
-#[lofty(internal_write_module_do_not_use_anywhere_else)]
+#[moosicbox_lofty(read_fn = "read::read_from")]
+#[moosicbox_lofty(internal_write_module_do_not_use_anywhere_else)]
 pub struct MpcFile {
 	/// The stream version
 	pub(crate) stream_version: MpcStreamVersion,
 	/// An ID3v2 tag (Not officially supported)
-	#[lofty(tag_type = "Id3v2")]
+	#[moosicbox_lofty(tag_type = "Id3v2")]
 	pub(crate) id3v2_tag: Option<Id3v2Tag>,
 	/// An ID3v1 tag
-	#[lofty(tag_type = "Id3v1")]
+	#[moosicbox_lofty(tag_type = "Id3v1")]
 	pub(crate) id3v1_tag: Option<Id3v1Tag>,
 	/// An APEv1/v2 tag
-	#[lofty(tag_type = "Ape")]
+	#[moosicbox_lofty(tag_type = "Ape")]
 	pub(crate) ape_tag: Option<ApeTag>,
 	/// The file's audio properties
 	pub(crate) properties: MpcProperties,

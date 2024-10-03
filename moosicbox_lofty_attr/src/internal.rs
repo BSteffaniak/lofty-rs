@@ -1,4 +1,4 @@
-// Items that only pertain to internal usage of lofty_attr
+// Items that only pertain to internal usage of moosicbox_lofty_attr
 
 use crate::lofty_file::FieldContents;
 
@@ -44,44 +44,44 @@ pub(crate) fn init_write_lookup(
 	}
 
 	insert!(map, Ape, {
-		lofty::ape::tag::ApeTagRef {
+		moosicbox_lofty::ape::tag::ApeTagRef {
 			read_only: false,
-			items: lofty::ape::tag::tagitems_into_ape(tag),
+			items: moosicbox_lofty::ape::tag::tagitems_into_ape(tag),
 		}
 		.write_to(data)
 	});
 
 	insert!(map, Id3v1, {
-		Into::<lofty::id3::v1::tag::Id3v1TagRef<'_>>::into(tag).write_to(data)
+		Into::<moosicbox_lofty::id3::v1::tag::Id3v1TagRef<'_>>::into(tag).write_to(data)
 	});
 
 	if id3v2_strippable {
 		insert!(map, Id3v2, {
-			lofty::id3::v2::tag::Id3v2TagRef::empty().write_to(data)
+			moosicbox_lofty::id3::v2::tag::Id3v2TagRef::empty().write_to(data)
 		});
 	} else {
 		insert!(map, Id3v2, {
-			lofty::id3::v2::tag::Id3v2TagRef {
-				flags: lofty::id3::v2::Id3v2TagFlags::default(),
-				frames: lofty::id3::v2::tag::tag_frames(tag),
+			moosicbox_lofty::id3::v2::tag::Id3v2TagRef {
+				flags: moosicbox_lofty::id3::v2::Id3v2TagFlags::default(),
+				frames: moosicbox_lofty::id3::v2::tag::tag_frames(tag),
 			}
 			.write_to(data)
 		});
 	}
 
 	insert!(map, RiffInfo, {
-		lofty::iff::wav::tag::RIFFInfoListRef::new(lofty::iff::wav::tag::tagitems_into_riff(
-			tag.items(),
-		))
+		moosicbox_lofty::iff::wav::tag::RIFFInfoListRef::new(
+			moosicbox_lofty::iff::wav::tag::tagitems_into_riff(tag.items()),
+		)
 		.write_to(data)
 	});
 
 	insert!(map, AiffText, {
-		lofty::iff::aiff::tag::AiffTextChunksRef {
-			name: tag.get_string(&lofty::tag::item::ItemKey::TrackTitle),
-			author: tag.get_string(&lofty::tag::item::ItemKey::TrackArtist),
-			copyright: tag.get_string(&lofty::tag::item::ItemKey::CopyrightMessage),
-			annotations: Some(tag.get_strings(&lofty::tag::item::ItemKey::Comment)),
+		moosicbox_lofty::iff::aiff::tag::AiffTextChunksRef {
+			name: tag.get_string(&moosicbox_lofty::tag::item::ItemKey::TrackTitle),
+			author: tag.get_string(&moosicbox_lofty::tag::item::ItemKey::TrackArtist),
+			copyright: tag.get_string(&moosicbox_lofty::tag::item::ItemKey::CopyrightMessage),
+			annotations: Some(tag.get_strings(&moosicbox_lofty::tag::item::ItemKey::Comment)),
 			comments: None,
 		}
 		.write_to(data)
@@ -96,7 +96,8 @@ pub(crate) fn write_module(
 ) -> proc_macro2::TokenStream {
 	let applicable_formats = fields.iter().map(|f| {
 		let tag_ty =
-			syn::parse_str::<syn::Path>(&format!("::lofty::TagType::{}", &f.tag_type)).unwrap();
+			syn::parse_str::<syn::Path>(&format!("::moosicbox_lofty::TagType::{}", &f.tag_type))
+				.unwrap();
 
 		let features = f.cfg_features.iter();
 
@@ -111,7 +112,7 @@ pub(crate) fn write_module(
 	quote! {
 		pub(crate) mod write {
 			#[allow(unused_variables)]
-			pub(crate) fn write_to(data: &mut ::std::fs::File, tag: &::lofty::Tag) -> ::lofty::error::Result<()> {
+			pub(crate) fn write_to(data: &mut ::std::fs::File, tag: &::moosicbox_lofty::Tag) -> ::moosicbox_lofty::error::Result<()> {
 				match tag.tag_type() {
 					#( #applicable_formats )*
 					_ => crate::macros::err!(UnsupportedTag),

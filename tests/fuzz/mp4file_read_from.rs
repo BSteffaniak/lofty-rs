@@ -1,5 +1,5 @@
 use crate::oom_test;
-use lofty::mp4::Mp4File;
+use moosicbox_lofty::mp4::Mp4File;
 
 #[test]
 fn oom1() {

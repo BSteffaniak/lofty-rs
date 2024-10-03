@@ -1,6 +1,6 @@
 use crate::{set_artist, temp_file, verify_artist};
-use lofty::musepack::MpcFile;
-use lofty::{
+use moosicbox_lofty::musepack::MpcFile;
+use moosicbox_lofty::{
 	AudioFile, FileType, ItemKey, ItemValue, ParseOptions, Probe, TagExt, TagItem, TagType,
 	TaggedFile, TaggedFileExt,
 };

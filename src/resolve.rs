@@ -1,6 +1,6 @@
 //! Tools to create custom file resolvers
 //!
-//! For a full example of a custom resolver, see [this](https://github.com/Serial-ATA/lofty-rs/tree/main/examples/custom_resolver).
+//! For a full example of a custom resolver, see [this](https://github.com/Serial-ATA/moosicbox_lofty-rs/tree/main/examples/custom_resolver).
 use crate::error::Result;
 use crate::file::{AudioFile, FileType, TaggedFile};
 use crate::probe::ParseOptions;
@@ -16,7 +16,7 @@ use once_cell::sync::Lazy;
 /// A custom file resolver
 ///
 /// This trait allows for the creation of custom [`FileType`]s, that can make use of
-/// lofty's API. Registering a `FileResolver` ([`register_custom_resolver`]) makes it possible
+/// moosicbox_lofty's API. Registering a `FileResolver` ([`register_custom_resolver`]) makes it possible
 /// to detect and read files using [`Probe`](crate::Probe).
 pub trait FileResolver: Send + Sync + AudioFile {
 	/// The extension associated with the [`FileType`] without the '.'
@@ -141,13 +141,13 @@ mod tests {
 	use std::io::{Read, Seek};
 	use std::panic;
 
-	use lofty_attr::LoftyFile;
+	use moosicbox_lofty_attr::LoftyFile;
 
 	#[derive(LoftyFile, Default)]
-	#[lofty(read_fn = "Self::read")]
-	#[lofty(file_type = "MyFile")]
+	#[moosicbox_lofty(read_fn = "Self::read")]
+	#[moosicbox_lofty(file_type = "MyFile")]
 	struct MyFile {
-		#[lofty(tag_type = "Id3v2")]
+		#[moosicbox_lofty(tag_type = "Id3v2")]
 		id3v2_tag: Option<Id3v2Tag>,
 		properties: FileProperties,
 	}

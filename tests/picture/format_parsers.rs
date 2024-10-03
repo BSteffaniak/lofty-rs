@@ -1,5 +1,5 @@
-use lofty::id3::v2::{AttachedPictureFrame, Id3v2Version};
-use lofty::{ParsingMode, Picture, PictureInformation, PictureType, TextEncoding};
+use moosicbox_lofty::id3::v2::{AttachedPictureFrame, Id3v2Version};
+use moosicbox_lofty::{ParsingMode, Picture, PictureInformation, PictureType, TextEncoding};
 
 use std::fs::File;
 use std::io::Read;

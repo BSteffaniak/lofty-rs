@@ -57,9 +57,9 @@ macro_rules! accessor_trait {
 			/// # Example
 			///
 			/// ```rust
-			/// use lofty::{Tag, Accessor};
+			/// use moosicbox_lofty::{Tag, Accessor};
 			///
-			/// # let tag_type = lofty::TagType::Id3v2;
+			/// # let tag_type = moosicbox_lofty::TagType::Id3v2;
 			/// let mut tag = Tag::new(tag_type);            ///
 			#[doc = "assert_eq!(tag." $name $(_ $other)* "(), None);"]
 			/// ```
@@ -74,7 +74,7 @@ macro_rules! accessor_trait {
 			/// # Example
 			///
 			/// ```rust,ignore
-			/// use lofty::{Tag, Accessor};
+			/// use moosicbox_lofty::{Tag, Accessor};
 			///
 			/// let mut tag = Tag::new(tag_type);
 			#[doc = "tag.set_" $name $(_ $other)* "(value);"]
@@ -92,7 +92,7 @@ macro_rules! accessor_trait {
 			/// # Example
 			///
 			/// ```rust,ignore
-			/// use lofty::{Tag, Accessor};
+			/// use moosicbox_lofty::{Tag, Accessor};
 			///
 			/// let mut tag = Tag::new(tag_type);
 			#[doc = "tag.set_" $name $(_ $other)* "(value);"]
@@ -144,8 +144,8 @@ pub trait TagExt: Accessor + Into<Tag> + Sized {
 	/// # Example
 	///
 	/// ```rust
-	/// use lofty::{Accessor, ItemKey, Tag, TagExt};
-	/// # let tag_type = lofty::TagType::Id3v2;
+	/// use moosicbox_lofty::{Accessor, ItemKey, Tag, TagExt};
+	/// # let tag_type = moosicbox_lofty::TagType::Id3v2;
 	///
 	/// let mut tag = Tag::new(tag_type);
 	/// assert_eq!(tag.len(), 0);
@@ -160,8 +160,8 @@ pub trait TagExt: Accessor + Into<Tag> + Sized {
 	/// # Example
 	///
 	/// ```rust
-	/// use lofty::{Accessor, ItemKey, Tag, TagExt};
-	/// # let tag_type = lofty::TagType::Id3v2;
+	/// use moosicbox_lofty::{Accessor, ItemKey, Tag, TagExt};
+	/// # let tag_type = moosicbox_lofty::TagType::Id3v2;
 	///
 	/// let mut tag = Tag::new(tag_type);
 	/// assert!(tag.is_empty());
@@ -176,8 +176,8 @@ pub trait TagExt: Accessor + Into<Tag> + Sized {
 	/// # Example
 	///
 	/// ```rust
-	/// use lofty::{Accessor, Tag, TagExt};
-	/// # let tag_type = lofty::TagType::Id3v2;
+	/// use moosicbox_lofty::{Accessor, Tag, TagExt};
+	/// # let tag_type = moosicbox_lofty::TagType::Id3v2;
 	///
 	/// let mut tag = Tag::new(tag_type);
 	/// assert!(tag.is_empty());
@@ -247,34 +247,34 @@ pub trait TagExt: Accessor + Into<Tag> + Sized {
 /// # Example
 ///
 /// ```no_run
-/// use lofty::mpeg::MpegFile;
-/// use lofty::{AudioFile, ItemKey, MergeTag as _, SplitTag as _};
+/// use moosicbox_lofty::mpeg::MpegFile;
+/// use moosicbox_lofty::{AudioFile, ItemKey, MergeTag as _, SplitTag as _};
 ///
 /// // Read the tag from a file
 /// # let mut file = std::fs::OpenOptions::new().write(true).open("/path/to/file.mp3")?;
-/// # let parse_options = lofty::ParseOptions::default();
+/// # let parse_options = moosicbox_lofty::ParseOptions::default();
 /// let mut mpeg_file = <MpegFile as AudioFile>::read_from(&mut file, parse_options)?;
 /// let mut id3v2 = mpeg_file
 /// 	.id3v2_mut()
 /// 	.map(std::mem::take)
 /// 	.unwrap_or_default();
 ///
-/// // Split: ID3v2 -> [`lofty::Tag`]
+/// // Split: ID3v2 -> [`moosicbox_lofty::Tag`]
 /// let (mut remainder, mut tag) = id3v2.split_tag();
 ///
-/// // Modify the metadata in the generic [`lofty::Tag`], independent
+/// // Modify the metadata in the generic [`moosicbox_lofty::Tag`], independent
 /// // of the underlying tag and file format.
 /// tag.insert_text(ItemKey::TrackTitle, "Track Title".to_owned());
 /// tag.remove_key(&ItemKey::Composer);
 ///
-/// // ID3v2 <- [`lofty::Tag`]
+/// // ID3v2 <- [`moosicbox_lofty::Tag`]
 /// let id3v2 = remainder.merge_tag(tag);
 ///
 /// // Write the changes back into the file
 /// mpeg_file.set_id3v2(id3v2);
 /// mpeg_file.save_to(&mut file)?;
 ///
-/// # Ok::<(), lofty::LoftyError>(())
+/// # Ok::<(), moosicbox_lofty::LoftyError>(())
 /// ```
 pub trait SplitTag {
 	/// The remainder of the split operation that is not represented

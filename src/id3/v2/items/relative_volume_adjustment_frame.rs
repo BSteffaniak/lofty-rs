@@ -31,7 +31,7 @@ impl ChannelType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::ChannelType;
+	/// use moosicbox_lofty::id3::v2::ChannelType;
 	///
 	/// let valid_byte = 1;
 	/// assert_eq!(

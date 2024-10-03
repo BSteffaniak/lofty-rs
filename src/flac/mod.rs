@@ -20,7 +20,7 @@ use crate::traits::TagExt;
 use std::fs::File;
 use std::io::Seek;
 
-use lofty_attr::LoftyFile;
+use moosicbox_lofty_attr::LoftyFile;
 
 // Exports
 
@@ -38,15 +38,15 @@ pub use properties::FlacProperties;
 /// * When converting to [`TaggedFile`], all pictures will be put inside of a [`VorbisComments`] tag, even if the
 ///   file did not originally contain one.
 #[derive(LoftyFile)]
-#[lofty(read_fn = "read::read_from")]
-#[lofty(write_fn = "Self::write_to")]
-#[lofty(no_into_taggedfile_impl)]
+#[moosicbox_lofty(read_fn = "read::read_from")]
+#[moosicbox_lofty(write_fn = "Self::write_to")]
+#[moosicbox_lofty(no_into_taggedfile_impl)]
 pub struct FlacFile {
 	/// An ID3v2 tag
-	#[lofty(tag_type = "Id3v2")]
+	#[moosicbox_lofty(tag_type = "Id3v2")]
 	pub(crate) id3v2_tag: Option<Id3v2Tag>,
 	/// The vorbis comments contained in the file
-	#[lofty(tag_type = "VorbisComments")]
+	#[moosicbox_lofty(tag_type = "VorbisComments")]
 	pub(crate) vorbis_comments_tag: Option<VorbisComments>,
 	pub(crate) pictures: Vec<(Picture, PictureInformation)>,
 	/// The file's audio properties

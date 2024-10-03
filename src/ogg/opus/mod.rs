@@ -9,16 +9,16 @@ use properties::OpusProperties;
 
 use std::io::{Read, Seek};
 
-use lofty_attr::LoftyFile;
+use moosicbox_lofty_attr::LoftyFile;
 
 /// An OGG Opus file
 #[derive(LoftyFile)]
-#[lofty(read_fn = "Self::read_from")]
+#[moosicbox_lofty(read_fn = "Self::read_from")]
 pub struct OpusFile {
 	/// The vorbis comments contained in the file
 	///
 	/// NOTE: While a metadata packet is required, it isn't required to actually have any data.
-	#[lofty(tag_type = "VorbisComments")]
+	#[moosicbox_lofty(tag_type = "VorbisComments")]
 	pub(crate) vorbis_comments_tag: VorbisComments,
 	/// The file's audio properties
 	pub(crate) properties: OpusProperties,

@@ -1,4 +1,4 @@
-use lofty::{Accessor, AudioFile, Probe, TaggedFileExt};
+use moosicbox_lofty::{Accessor, AudioFile, Probe, TaggedFileExt};
 use std::path::Path;
 
 fn main() {
@@ -28,10 +28,10 @@ fn main() {
 	println!("Album: {}", tag.album().as_deref().unwrap_or("None"));
 	println!("Genre: {}", tag.genre().as_deref().unwrap_or("None"));
 
-	// import keys from https://docs.rs/lofty/latest/lofty/enum.ItemKey.html
+	// import keys from https://docs.rs/moosicbox_lofty/latest/moosicbox_lofty/enum.ItemKey.html
 	println!(
 		"Album Artist: {}",
-		tag.get_string(&lofty::ItemKey::AlbumArtist)
+		tag.get_string(&moosicbox_lofty::ItemKey::AlbumArtist)
 			.unwrap_or("None")
 	);
 

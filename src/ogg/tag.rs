@@ -15,7 +15,7 @@ use std::io::Write;
 use std::ops::Deref;
 use std::path::Path;
 
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 macro_rules! impl_accessor {
 	($($name:ident => $key:literal;)+) => {
@@ -77,8 +77,8 @@ impl VorbisComments {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let vorbis_comments_tag = VorbisComments::new();
 	/// assert!(vorbis_comments_tag.is_empty());
@@ -90,7 +90,7 @@ impl VorbisComments {
 	/// Returns the vendor string
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut vorbis_comments = VorbisComments::default();
 	/// assert!(vorbis_comments.vendor().is_empty());
@@ -105,7 +105,7 @@ impl VorbisComments {
 	/// Sets the vendor string
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut vorbis_comments = VorbisComments::default();
 	///
@@ -121,7 +121,7 @@ impl VorbisComments {
 	/// Returns an [`Iterator`] over the stored key/value pairs.
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut vorbis_comments = VorbisComments::default();
 	///
@@ -142,8 +142,8 @@ impl VorbisComments {
 	/// Returns an [`Iterator`] with the stored key/value pairs.
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let mut vorbis_comments = VorbisComments::default();
 	///
@@ -169,7 +169,7 @@ impl VorbisComments {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut vorbis_comments = VorbisComments::default();
 	///
@@ -197,7 +197,7 @@ impl VorbisComments {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut vorbis_comments = VorbisComments::default();
 	///
@@ -224,7 +224,7 @@ impl VorbisComments {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut tag = VorbisComments::default();
 	/// tag.insert(String::from("TITLE"), String::from("Title 1"));
@@ -251,7 +251,7 @@ impl VorbisComments {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut tag = VorbisComments::default();
 	/// tag.push(String::from("TITLE"), String::from("Title 1"));
@@ -275,7 +275,7 @@ impl VorbisComments {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::VorbisComments;
+	/// use moosicbox_lofty::ogg::VorbisComments;
 	///
 	/// let mut tag = VorbisComments::default();
 	/// tag.push(String::from("TITLE"), String::from("Title 1"));

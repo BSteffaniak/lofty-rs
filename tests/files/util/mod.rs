@@ -78,8 +78,8 @@ macro_rules! remove_tag {
 	($path:tt, $tag_type:path) => {
 		let mut file = temp_file!($path);
 
-		let tagged_file = lofty::Probe::new(&mut file)
-			.options(lofty::ParseOptions::new().read_properties(false))
+		let tagged_file = moosicbox_lofty::Probe::new(&mut file)
+			.options(moosicbox_lofty::ParseOptions::new().read_properties(false))
 			.guess_file_type()
 			.unwrap()
 			.read()
@@ -92,8 +92,8 @@ macro_rules! remove_tag {
 
 		file.rewind().unwrap();
 
-		let tagged_file = lofty::Probe::new(&mut file)
-			.options(lofty::ParseOptions::new().read_properties(false))
+		let tagged_file = moosicbox_lofty::Probe::new(&mut file)
+			.options(moosicbox_lofty::ParseOptions::new().read_properties(false))
 			.guess_file_type()
 			.unwrap()
 			.read()

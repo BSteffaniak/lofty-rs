@@ -1,5 +1,5 @@
 use crate::oom_test;
-use lofty::flac::FlacFile;
+use moosicbox_lofty::flac::FlacFile;
 
 #[test]
 fn oom1() {

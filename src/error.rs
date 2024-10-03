@@ -298,8 +298,8 @@ impl FileEncodingError {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::error::FileEncodingError;
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::error::FileEncodingError;
+	/// use moosicbox_lofty::FileType;
 	///
 	/// // This error is bounded to `FileType::Mpeg`, which will be displayed when the error is formatted
 	/// let mpeg_error =
@@ -318,8 +318,8 @@ impl FileEncodingError {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::error::FileEncodingError;
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::error::FileEncodingError;
+	/// use moosicbox_lofty::FileType;
 	///
 	/// // The error isn't bounded to FileType::Mpeg, only the message will be displayed when the
 	/// // error is formatted
@@ -337,8 +337,8 @@ impl FileEncodingError {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::error::FileEncodingError;
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::error::FileEncodingError;
+	/// use moosicbox_lofty::FileType;
 	///
 	/// let mpeg_error =
 	/// 	FileEncodingError::new(FileType::Mpeg, "Something went wrong in the MPEG file!");
@@ -354,8 +354,8 @@ impl FileEncodingError {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::error::FileEncodingError;
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::error::FileEncodingError;
+	/// use moosicbox_lofty::FileType;
 	///
 	/// let mpeg_error =
 	/// 	FileEncodingError::new(FileType::Mpeg, "Something went wrong in the MPEG file!");
@@ -401,8 +401,8 @@ impl LoftyError {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::error::ErrorKind;
-	/// use lofty::LoftyError;
+	/// use moosicbox_lofty::error::ErrorKind;
+	/// use moosicbox_lofty::LoftyError;
 	///
 	/// let unknown_format = LoftyError::new(ErrorKind::UnknownFormat);
 	/// ```
@@ -416,8 +416,8 @@ impl LoftyError {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::error::ErrorKind;
-	/// use lofty::LoftyError;
+	/// use moosicbox_lofty::error::ErrorKind;
+	/// use moosicbox_lofty::LoftyError;
 	///
 	/// let unknown_format = LoftyError::new(ErrorKind::UnknownFormat);
 	/// if let ErrorKind::UnknownFormat = unknown_format.kind() {

@@ -1,9 +1,9 @@
-use lofty::ape::ApeTag;
-use lofty::error::Result as LoftyResult;
-use lofty::id3::v2::Id3v2Tag;
-use lofty::resolve::FileResolver;
-use lofty::{FileProperties, FileType, ParseOptions, TagType};
-use lofty_attr::LoftyFile;
+use moosicbox_lofty::ape::ApeTag;
+use moosicbox_lofty::error::Result as LoftyResult;
+use moosicbox_lofty::id3::v2::Id3v2Tag;
+use moosicbox_lofty::resolve::FileResolver;
+use moosicbox_lofty::{FileProperties, FileType, ParseOptions, TagType};
+use moosicbox_lofty_attr::LoftyFile;
 use std::fs::File;
 
 #[rustfmt::skip]
@@ -11,10 +11,10 @@ use std::fs::File;
 // for you.
 #[derive(LoftyFile)]
 // `read_fn` is the function that will house your parsing logic.
-// See `lofty::AudioFile::read_from` for the expected signature.
-#[lofty(read_fn = "Self::parse_my_file")]
+// See `moosicbox_lofty::AudioFile::read_from` for the expected signature.
+#[moosicbox_lofty(read_fn = "Self::parse_my_file")]
 // The `FileType` variant of the file
-#[lofty(file_type = "MyFile")]
+#[moosicbox_lofty(file_type = "MyFile")]
 struct MyFile {
 	// A file has two requirements, at least one tag field, and a properties field.
 
@@ -24,12 +24,12 @@ struct MyFile {
 
 
 	// Specify a tag type
-	#[lofty(tag_type = "Id3v2")]
+	#[moosicbox_lofty(tag_type = "Id3v2")]
 	// Let's say our file *always* has an ID3v2Tag present.
 	pub id3v2_tag: Id3v2Tag,
 
 	// Our APE tag is optional in this format, so we wrap it in an `Option`
-	#[lofty(tag_type = "Ape")]
+	#[moosicbox_lofty(tag_type = "Ape")]
 	pub ape_tag: Option<ApeTag>,
 
 	// The properties field *must* be present and named as such.
@@ -88,17 +88,17 @@ fn main() {
 	// `register_custom_resolver` takes the type of our file, alongside a name.
 	// The name will be used in the `FileType` variant (e.g. FileType::Custom("MyFile")).
 	// The name should preferably match the name of the file struct to avoid confusion.
-	lofty::resolve::register_custom_resolver::<MyFile>("MyFile");
+	moosicbox_lofty::resolve::register_custom_resolver::<MyFile>("MyFile");
 
 	// Now when using the following functions, your custom file will be checked
 
 	let path = "examples/custom_resolver/test_asset.myfile";
 
 	// Detected from the "myfile" extension
-	let _ = lofty::read_from_path(path).unwrap();
+	let _ = moosicbox_lofty::read_from_path(path).unwrap();
 
 	let mut file = File::open(path).unwrap();
 
 	// The file's content starts with "myfiledata"
-	let _ = lofty::read_from(&mut file).unwrap();
+	let _ = moosicbox_lofty::read_from(&mut file).unwrap();
 }

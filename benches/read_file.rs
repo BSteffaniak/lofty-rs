@@ -1,4 +1,4 @@
-use lofty::{ParseOptions, Probe};
+use moosicbox_lofty::{ParseOptions, Probe};
 
 use criterion::{criterion_group, criterion_main, Criterion};
 

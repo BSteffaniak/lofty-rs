@@ -1,8 +1,9 @@
 # Lofty
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Serial-ATA/lofty-rs/ci.yml?branch=main&logo=github&style=for-the-badge)](https://github.com/Serial-ATA/lofty-rs/actions/workflows/ci.yml)
-[![Downloads](https://img.shields.io/crates/d/lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/lofty)
-[![Version](https://img.shields.io/crates/v/lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/lofty)
-[![Documentation](https://img.shields.io/badge/docs.rs-lofty-informational?style=for-the-badge&logo=read-the-docs)](https://docs.rs/lofty/)
+
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Serial-ATA/moosicbox_lofty-rs/ci.yml?branch=main&logo=github&style=for-the-badge)](https://github.com/Serial-ATA/moosicbox_lofty-rs/actions/workflows/ci.yml)
+[![Downloads](https://img.shields.io/crates/d/moosicbox_lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/moosicbox_lofty)
+[![Version](https://img.shields.io/crates/v/moosicbox_lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/moosicbox_lofty)
+[![Documentation](https://img.shields.io/badge/docs.rs-moosicbox_moosicbox_lofty-informational?style=for-the-badge&logo=read-the-docs)](https://docs.rs/moosicbox_moosicbox_lofty/)
 
 Parse, convert, and write metadata to various audio formats.
 
@@ -17,10 +18,10 @@ grammar, punctuation, or missing examples is highly appreciated!
 
 ## Examples
 
-* [Tag reader](examples/tag_reader.rs)
-* [Tag stripper](examples/tag_stripper.rs)
-* [Tag writer](examples/tag_writer.rs)
-* [Custom resolver](examples/custom_resolver)
+- [Tag reader](examples/tag_reader.rs)
+- [Tag stripper](examples/tag_stripper.rs)
+- [Tag writer](examples/tag_writer.rs)
+- [Custom resolver](examples/custom_resolver)
 
 To try them out, run:
 
@@ -33,7 +34,7 @@ cargo run --example custom_resolver
 
 ## Documentation
 
-Available [here](https://docs.rs/lofty)
+Available [here](https://docs.rs/moosicbox_lofty)
 
 ## Benchmarking
 
@@ -50,9 +51,9 @@ RUSTFLAGS="--cfg bench" cargo bench
 
 Licensed under either of
 
-* Apache License, Version 2.0
+- Apache License, Version 2.0
   ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-* MIT license
+- MIT license
   ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.

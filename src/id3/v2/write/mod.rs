@@ -160,7 +160,7 @@ pub(super) fn create_tag<'a, I: Iterator<Item = FrameRef<'a>> + 'a>(
 fn create_tag_header(flags: Id3v2TagFlags) -> Result<(Cursor<Vec<u8>>, u32)> {
 	let mut header = Cursor::new(Vec::new());
 
-	header.write_all(&[b'I', b'D', b'3'])?;
+	header.write_all(b"ID3")?;
 
 	let mut tag_flags = 0;
 

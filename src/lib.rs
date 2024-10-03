@@ -1,6 +1,6 @@
-//! [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Serial-ATA/lofty-rs/ci.yml?branch=main&logo=github&style=for-the-badge)](https://github.com/Serial-ATA/lofty-rs/actions/workflows/ci.yml)
-//! [![Downloads](https://img.shields.io/crates/d/lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/lofty)
-//! [![Version](https://img.shields.io/crates/v/lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/lofty)
+//! [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Serial-ATA/moosicbox_lofty-rs/ci.yml?branch=main&logo=github&style=for-the-badge)](https://github.com/Serial-ATA/moosicbox_lofty-rs/actions/workflows/ci.yml)
+//! [![Downloads](https://img.shields.io/crates/d/moosicbox_lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/moosicbox_lofty)
+//! [![Version](https://img.shields.io/crates/v/moosicbox_lofty?style=for-the-badge&logo=rust)](https://crates.io/crates/moosicbox_lofty)
 //!
 //! Parse, convert, and write metadata to audio formats.
 //!
@@ -16,9 +16,9 @@
 //! ### Using a path
 //!
 //! ```rust,no_run
-//! # use lofty::LoftyError;
+//! # use moosicbox_lofty::LoftyError;
 //! # fn main() -> Result<(), LoftyError> {
-//! use lofty::{read_from_path, Probe};
+//! use moosicbox_lofty::{read_from_path, Probe};
 //!
 //! // This will guess the format from the extension
 //! // ("mp3" in this case), but we can guess from the content if we want to.
@@ -35,9 +35,9 @@
 //! ### Using an existing reader
 //!
 //! ```rust,no_run
-//! # use lofty::LoftyError;
+//! # use moosicbox_lofty::LoftyError;
 //! # fn main() -> Result<(), LoftyError> {
-//! use lofty::{read_from, ParseOptions};
+//! use moosicbox_lofty::{read_from, ParseOptions};
 //! use std::fs::File;
 //!
 //! // Let's read from an open file
@@ -53,9 +53,9 @@
 //! ### Accessing tags
 //!
 //! ```rust,no_run
-//! # use lofty::LoftyError;
+//! # use moosicbox_lofty::LoftyError;
 //! # fn main() -> Result<(), LoftyError> {
-//! use lofty::{read_from_path, ParseOptions, TaggedFileExt};
+//! use moosicbox_lofty::{read_from_path, ParseOptions, TaggedFileExt};
 //!
 //! let path = "test.mp3";
 //! let tagged_file = read_from_path(path)?;
@@ -73,10 +73,10 @@
 //! ## Using concrete file types
 //!
 //! ```rust
-//! # use lofty::LoftyError;
+//! # use moosicbox_lofty::LoftyError;
 //! # fn main() -> Result<(), LoftyError> {
-//! use lofty::mpeg::MpegFile;
-//! use lofty::{AudioFile, ParseOptions, TagType};
+//! use moosicbox_lofty::mpeg::MpegFile;
+//! use moosicbox_lofty::{AudioFile, ParseOptions, TagType};
 //! use std::fs::File;
 //!
 //! # let path = "tests/files/assets/minimal/full_test.mp3";
@@ -149,7 +149,7 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
 // proc macro hacks
-extern crate self as lofty;
+extern crate self as moosicbox_lofty;
 pub(crate) mod _this_is_internal {}
 
 pub mod aac;
@@ -189,4 +189,4 @@ pub use crate::traits::{Accessor, MergeTag, SplitTag, TagExt};
 
 pub use picture::PictureInformation;
 
-pub use lofty_attr::LoftyFile;
+pub use moosicbox_lofty_attr::LoftyFile;

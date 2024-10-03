@@ -1,5 +1,5 @@
 use crate::{set_artist, temp_file, verify_artist};
-use lofty::{
+use moosicbox_lofty::{
 	FileType, ItemKey, ItemValue, ParseOptions, Probe, TagExt, TagItem, TagType, TaggedFileExt,
 };
 use std::io::{Seek, Write};
@@ -149,8 +149,8 @@ fn remove(path: &str, tag_type: TagType) {
 
 #[test]
 fn flac_with_id3v2() {
-	use lofty::flac::FlacFile;
-	use lofty::{Accessor, AudioFile};
+	use moosicbox_lofty::flac::FlacFile;
+	use moosicbox_lofty::{Accessor, AudioFile};
 
 	let file = std::fs::read("tests/files/assets/flac_with_id3v2.flac").unwrap();
 	let flac_file =
@@ -172,8 +172,8 @@ fn flac_remove_id3v2() {
 
 #[test]
 fn flac_try_write_non_empty_id3v2() {
-	use lofty::id3::v2::Id3v2Tag;
-	use lofty::Accessor;
+	use moosicbox_lofty::id3::v2::Id3v2Tag;
+	use moosicbox_lofty::Accessor;
 
 	let mut tag = Id3v2Tag::default();
 	tag.set_artist(String::from("Foo artist"));

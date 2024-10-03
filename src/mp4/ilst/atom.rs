@@ -144,7 +144,7 @@ impl<'a> Atom<'a> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::{Atom, AtomData, AtomIdent};
+	/// use moosicbox_lofty::mp4::{Atom, AtomData, AtomIdent};
 	///
 	/// let atom = Atom::new(
 	/// 	AtomIdent::Fourcc(*b"\x49ART"),
@@ -177,9 +177,9 @@ impl<'a> Atom<'a> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::{Atom, AtomData, AtomIdent};
+	/// use moosicbox_lofty::mp4::{Atom, AtomData, AtomIdent};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// // Create an artist atom
 	/// let mut atom = Atom::new(
 	/// 	AtomIdent::Fourcc(*b"\x49ART"),

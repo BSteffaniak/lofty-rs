@@ -104,12 +104,12 @@ pub(crate) fn create(
 		#input
 
 		impl #ident {
-			pub(crate) const SUPPORTED_FORMATS: &'static [::lofty::FileType] = &[
-				#( ::lofty::FileType:: #flattened_file_types ),*
+			pub(crate) const SUPPORTED_FORMATS: &'static [::moosicbox_lofty::FileType] = &[
+				#( ::moosicbox_lofty::FileType:: #flattened_file_types ),*
 			];
 
-			pub(crate) const READ_ONLY_FORMATS: &'static [::lofty::FileType] = &[
-				#( ::lofty::FileType:: #read_only_file_types ),*
+			pub(crate) const READ_ONLY_FORMATS: &'static [::moosicbox_lofty::FileType] = &[
+				#( ::moosicbox_lofty::FileType:: #read_only_file_types ),*
 			];
 		}
 	}

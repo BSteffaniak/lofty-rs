@@ -372,7 +372,7 @@ pub struct FrameFlags {
 	pub compression: bool,
 	/// Frame encryption method symbol
 	///
-	/// NOTE: Since the encryption method is unknown, lofty cannot do anything with these frames
+	/// NOTE: Since the encryption method is unknown, moosicbox_lofty cannot do anything with these frames
 	///
 	/// The encryption method symbol **must** be > 0x80.
 	pub encryption: Option<u8>,

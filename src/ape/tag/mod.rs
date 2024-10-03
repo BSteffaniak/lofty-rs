@@ -16,7 +16,7 @@ use std::io::Write;
 use std::ops::Deref;
 use std::path::Path;
 
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 macro_rules! impl_accessor {
 	($($name:ident => $($key:literal)|+;)+) => {
@@ -88,8 +88,8 @@ impl ApeTag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ape::ApeTag;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::ape::ApeTag;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let ape_tag = ApeTag::new();
 	/// assert!(ape_tag.is_empty());
@@ -106,8 +106,8 @@ impl ApeTag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ape::ApeTag;
-	/// use lofty::Accessor;
+	/// use moosicbox_lofty::ape::ApeTag;
+	/// use moosicbox_lofty::Accessor;
 	///
 	/// let mut ape_tag = ApeTag::new();
 	/// ape_tag.set_title(String::from("Foo title"));
@@ -137,8 +137,8 @@ impl ApeTag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ape::ApeTag;
-	/// use lofty::Accessor;
+	/// use moosicbox_lofty::ape::ApeTag;
+	/// use moosicbox_lofty::Accessor;
 	///
 	/// let mut ape_tag = ApeTag::new();
 	/// ape_tag.set_title(String::from("Foo title"));

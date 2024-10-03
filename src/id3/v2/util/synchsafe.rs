@@ -14,9 +14,9 @@ use std::io::Read;
 ///
 /// ```rust
 /// use std::io::{Cursor, Read};
-/// use lofty::id3::v2::util::synchsafe::UnsynchronizedStream;
+/// use moosicbox_lofty::id3::v2::util::synchsafe::UnsynchronizedStream;
 ///
-/// fn main() -> lofty::Result<()> {
+/// fn main() -> moosicbox_lofty::Result<()> {
 /// // The content has two `0xFF 0x00` pairs, which will be removed
 /// let content = [0xFF, 0x00, 0x1A, 0xFF, 0x00, 0x15];
 ///
@@ -44,7 +44,7 @@ impl<R> UnsynchronizedStream<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::util::synchsafe::UnsynchronizedStream;
+	/// use moosicbox_lofty::id3::v2::util::synchsafe::UnsynchronizedStream;
 	/// use std::io::Cursor;
 	///
 	/// let reader = Cursor::new([0xFF, 0x00, 0x1A]);
@@ -65,10 +65,10 @@ impl<R> UnsynchronizedStream<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::util::synchsafe::UnsynchronizedStream;
+	/// use moosicbox_lofty::id3::v2::util::synchsafe::UnsynchronizedStream;
 	/// use std::io::Cursor;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// let reader = Cursor::new([0xFF, 0x00, 0x1A]);
 	/// let unsynchronized_reader = UnsynchronizedStream::new(reader);
 	///
@@ -144,9 +144,9 @@ pub trait SynchsafeInteger: Sized {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::util::synchsafe::SynchsafeInteger;
+	/// use moosicbox_lofty::id3::v2::util::synchsafe::SynchsafeInteger;
 	///
-	/// # fn main() -> lofty::error::Result<()> {
+	/// # fn main() -> moosicbox_lofty::error::Result<()> {
 	/// // Maximum value we can represent in a synchsafe u32
 	/// let unsynch_number = 0xFFF_FFFF_u32;
 	/// let synch_number = unsynch_number.synch()?;
@@ -167,7 +167,7 @@ pub trait SynchsafeInteger: Sized {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::util::synchsafe::SynchsafeInteger;
+	/// use moosicbox_lofty::id3::v2::util::synchsafe::SynchsafeInteger;
 	///
 	/// // 0b11111111
 	/// let large_number = u8::MAX;
@@ -188,9 +188,9 @@ pub trait SynchsafeInteger: Sized {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::util::synchsafe::SynchsafeInteger;
+	/// use moosicbox_lofty::id3::v2::util::synchsafe::SynchsafeInteger;
 	///
-	/// # fn main() -> lofty::error::Result<()> {
+	/// # fn main() -> moosicbox_lofty::error::Result<()> {
 	/// let unsynch_number = 0xFFF_FFFF_u32;
 	/// let synch_number = unsynch_number.synch()?;
 	///

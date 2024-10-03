@@ -9,7 +9,7 @@ mod moov;
 mod properties;
 mod read;
 
-use lofty_attr::LoftyFile;
+use moosicbox_lofty_attr::LoftyFile;
 
 // Exports
 
@@ -29,11 +29,11 @@ pub(crate) use properties::SAMPLE_RATES;
 
 /// An MP4 file
 #[derive(LoftyFile)]
-#[lofty(read_fn = "read::read_from")]
+#[moosicbox_lofty(read_fn = "read::read_from")]
 pub struct Mp4File {
 	/// The file format from ftyp's "major brand" (Ex. "M4A ")
 	pub(crate) ftyp: String,
-	#[lofty(tag_type = "Mp4Ilst")]
+	#[moosicbox_lofty(tag_type = "Mp4Ilst")]
 	/// The parsed `ilst` (metadata) atom, if it exists
 	pub(crate) ilst_tag: Option<Ilst>,
 	/// The file's audio properties
@@ -46,10 +46,10 @@ impl Mp4File {
 	/// # Examples
 	///
 	/// ```rust,no_run
-	/// use lofty::mp4::Mp4File;
-	/// use lofty::{AudioFile, ParseOptions};
+	/// use moosicbox_lofty::mp4::Mp4File;
+	/// use moosicbox_lofty::{AudioFile, ParseOptions};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let mut m4a_reader = std::io::Cursor::new(&[]);
 	/// let m4a_file = Mp4File::read_from(&mut m4a_reader, ParseOptions::new())?;
 	///

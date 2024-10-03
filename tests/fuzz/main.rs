@@ -1,4 +1,4 @@
-use lofty::{AudioFile, ParseOptions};
+use moosicbox_lofty::{AudioFile, ParseOptions};
 use std::io::Cursor;
 use std::path::Path;
 use std::thread;

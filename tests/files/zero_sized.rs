@@ -1,10 +1,10 @@
-use lofty::ape::ApeFile;
-use lofty::flac::FlacFile;
-use lofty::iff::aiff::AiffFile;
-use lofty::iff::wav::WavFile;
-use lofty::mp4::Mp4File;
-use lofty::mpeg::MpegFile;
-use lofty::{AudioFile, ParseOptions, ParsingMode};
+use moosicbox_lofty::ape::ApeFile;
+use moosicbox_lofty::flac::FlacFile;
+use moosicbox_lofty::iff::aiff::AiffFile;
+use moosicbox_lofty::iff::wav::WavFile;
+use moosicbox_lofty::mp4::Mp4File;
+use moosicbox_lofty::mpeg::MpegFile;
+use moosicbox_lofty::{AudioFile, ParseOptions, ParsingMode};
 
 fn read_file_with_properties<A: AudioFile>(path: &str) -> bool {
 	let res = <A as AudioFile>::read_from(

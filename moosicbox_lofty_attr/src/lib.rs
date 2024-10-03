@@ -1,4 +1,4 @@
-//! Macros for [Lofty](https://crates.io/crates/lofty)
+//! Macros for [Lofty](https://crates.io/crates/moosicbox_lofty)
 
 #![allow(
 	unknown_lints,
@@ -46,8 +46,8 @@ use syn::{parse_macro_input, Data, DataStruct, DeriveInput, Fields, ItemStruct};
 
 /// Creates a file usable by Lofty
 ///
-/// See [here](https://github.com/Serial-ATA/lofty-rs/tree/main/examples/custom_resolver) for an example of how to use it.
-#[proc_macro_derive(LoftyFile, attributes(lofty))]
+/// See [here](https://github.com/Serial-ATA/moosicbox_lofty-rs/tree/main/examples/custom_resolver) for an example of how to use it.
+#[proc_macro_derive(LoftyFile, attributes(moosicbox_lofty))]
 pub fn lofty_file(input: TokenStream) -> TokenStream {
 	let input = parse_macro_input!(input as DeriveInput);
 

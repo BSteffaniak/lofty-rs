@@ -83,7 +83,7 @@ pub(crate) fn parse(
 		let name = format_ident!("_AssertTagExt{}", i);
 		let field_ty = &f.ty;
 		quote_spanned! {field_ty.span()=>
-			struct #name where #field_ty: lofty::TagExt;
+			struct #name where #field_ty: moosicbox_lofty::TagExt;
 		}
 	});
 
@@ -328,23 +328,23 @@ fn generate_audiofile_impl(
 
 	let properties_field_ty = &properties_field.ty;
 	let assert_properties_impl = quote_spanned! {properties_field_ty.span()=>
-		struct _AssertIntoFileProperties where #properties_field_ty: ::std::convert::Into<::lofty::FileProperties>;
+		struct _AssertIntoFileProperties where #properties_field_ty: ::std::convert::Into<::moosicbox_lofty::FileProperties>;
 	};
 
 	quote! {
 		#assert_properties_impl
-		impl ::lofty::AudioFile for #struct_name {
+		impl ::moosicbox_lofty::AudioFile for #struct_name {
 			type Properties = #properties_field_ty;
 
-			fn read_from<R>(reader: &mut R, parse_options: ::lofty::ParseOptions) -> ::lofty::error::Result<Self>
+			fn read_from<R>(reader: &mut R, parse_options: ::moosicbox_lofty::ParseOptions) -> ::moosicbox_lofty::error::Result<Self>
 			where
 				R: std::io::Read + std::io::Seek,
 			{
 				#read_fn(reader, parse_options)
 			}
 
-			fn save_to(&self, file: &mut ::std::fs::File) -> ::lofty::error::Result<()> {
-				use ::lofty::TagExt as _;
+			fn save_to(&self, file: &mut ::std::fs::File) -> ::moosicbox_lofty::error::Result<()> {
+				use ::moosicbox_lofty::TagExt as _;
 				use ::std::io::Seek as _;
 				#save_to_body
 			}
@@ -359,9 +359,9 @@ fn generate_audiofile_impl(
 			}
 
 			#[allow(unreachable_code, unused_variables)]
-			fn contains_tag_type(&self, tag_type: ::lofty::TagType) -> bool {
+			fn contains_tag_type(&self, tag_type: ::moosicbox_lofty::TagType) -> bool {
 				match tag_type {
-					#( ::lofty::TagType::#tag_type => { #tag_exists_2 } ),*
+					#( ::moosicbox_lofty::TagType::#tag_type => { #tag_exists_2 } ),*
 					_ => false
 				}
 			}
@@ -430,22 +430,22 @@ fn generate_from_taggedfile_impl(
 	});
 
 	let file_type_variant = if has_internal_file_type {
-		quote! { ::lofty::FileType::#file_type }
+		quote! { ::moosicbox_lofty::FileType::#file_type }
 	} else {
 		let file_ty_str = file_type.to_string();
-		quote! { ::lofty::FileType::Custom(#file_ty_str) }
+		quote! { ::moosicbox_lofty::FileType::Custom(#file_ty_str) }
 	};
 
 	quote! {
-		impl ::std::convert::From<#struct_name> for ::lofty::TaggedFile {
+		impl ::std::convert::From<#struct_name> for ::moosicbox_lofty::TaggedFile {
 			fn from(input: #struct_name) -> Self {
-				use ::lofty::TaggedFileExt as _;
+				use ::moosicbox_lofty::TaggedFileExt as _;
 
-				::lofty::TaggedFile::new(
+				::moosicbox_lofty::TaggedFile::new(
 					#file_type_variant,
-					::lofty::FileProperties::from(input.properties),
+					::moosicbox_lofty::FileProperties::from(input.properties),
 					{
-						let mut tags: Vec<::lofty::Tag> = Vec::new();
+						let mut tags: Vec<::moosicbox_lofty::Tag> = Vec::new();
 						#( #conditions )*
 
 						tags

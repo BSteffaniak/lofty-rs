@@ -8,7 +8,7 @@ authors = [
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "Macros for Lofty, modified for MoosicBox"
-repository = "https://github.com/Serial-ATA/lofty-rs"
+repository = "https://github.com/Serial-ATA/moosicbox_lofty-rs"
 readme = "README.md"
 include = ["src", "Cargo.toml", "../LICENSE-*"]
 

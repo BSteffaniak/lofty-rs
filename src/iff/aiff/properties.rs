@@ -60,7 +60,7 @@ impl AiffCompressionType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::iff::aiff::AiffCompressionType;
+	/// use moosicbox_lofty::iff::aiff::AiffCompressionType;
 	///
 	/// let compression_type = AiffCompressionType::alaw;
 	/// assert_eq!(compression_type.compression_name(), "ALaw 2:1");

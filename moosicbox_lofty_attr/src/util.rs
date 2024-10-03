@@ -15,7 +15,7 @@ pub(crate) use bail;
 pub(crate) fn get_attr(name: &str, attrs: &[Attribute]) -> Option<proc_macro2::TokenStream> {
 	let mut found = None;
 	for attr in attrs {
-		if let Some(list) = get_attr_list("lofty", attr) {
+		if let Some(list) = get_attr_list("moosicbox_lofty", attr) {
 			let res = list.parse_nested_meta(|meta| {
 				if meta.path.is_ident(name) {
 					let value = meta.value()?;
@@ -37,7 +37,7 @@ pub(crate) fn get_attr(name: &str, attrs: &[Attribute]) -> Option<proc_macro2::T
 }
 
 pub(crate) fn has_path_attr(attr: &Attribute, name: &str) -> bool {
-	if let Some(list) = get_attr_list("lofty", attr) {
+	if let Some(list) = get_attr_list("moosicbox_lofty", attr) {
 		let res = list.parse_nested_meta(|meta| {
 			if meta.path.is_ident(name) {
 				return Ok(());

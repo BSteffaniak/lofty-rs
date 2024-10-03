@@ -1,4 +1,4 @@
-use lofty::{Probe, TaggedFileExt};
+use moosicbox_lofty::{Probe, TaggedFileExt};
 use std::io::Write;
 
 fn main() {

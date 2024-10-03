@@ -1,4 +1,4 @@
-use lofty::{Accessor, Probe, Tag, TagExt, TaggedFileExt};
+use moosicbox_lofty::{Accessor, Probe, Tag, TagExt, TaggedFileExt};
 
 use structopt::StructOpt;
 

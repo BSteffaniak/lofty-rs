@@ -11,7 +11,7 @@ use std::fs::File;
 use std::io::Write;
 use std::path::Path;
 
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 macro_rules! impl_accessor {
 	($($name:ident => $key:literal;)+) => {
@@ -58,8 +58,8 @@ impl RIFFInfoList {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::iff::wav::RIFFInfoList;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::iff::wav::RIFFInfoList;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let riff_info_tag = RIFFInfoList::new();
 	/// assert!(riff_info_tag.is_empty());

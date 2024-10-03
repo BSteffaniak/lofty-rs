@@ -7,19 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **MP4**: Check if audio streams are DRM protected, exposed as `Mp4Properties::is_drm_protected()` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/297))
+- **MP4**: Check if audio streams are DRM protected, exposed as `Mp4Properties::is_drm_protected()` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/297))
 - **ID3v2**:
-  - Add `Id3v2ErrorKind::EmptyFrame` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/299))
-  - Support converting some TIPL frame values into generic `TagItem`s ([PR](https://github.com/Serial-ATA/lofty-rs/pull/301))
+  - Add `Id3v2ErrorKind::EmptyFrame` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/299))
+  - Support converting some TIPL frame values into generic `TagItem`s ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/301))
     - Supported TIPL keys are: "producer", "arranger", "engineer", "DJ-mix", "mix".
 
 ### Changed
-- **ID3v1**: Renamed `GENRES[14]` to `"R&B"` (Previously `"Rhythm & Blues"`) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/296))
-- **MP4**: Duration milliseconds are now rounded to the nearest whole number ([PR](https://github.com/Serial-ATA/lofty-rs/pull/298))
-- **ID3v2**: Stop erroring on empty frames when not using `ParsingMode::Strict` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/299))
+- **ID3v1**: Renamed `GENRES[14]` to `"R&B"` (Previously `"Rhythm & Blues"`) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/296))
+- **MP4**: Duration milliseconds are now rounded to the nearest whole number ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/298))
+- **ID3v2**: Stop erroring on empty frames when not using `ParsingMode::Strict` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/299))
 
 ### Fixed
-- **MP4**: The `dfLa` atom for FLAC streams will now be found, providing better properties ([PR](https://github.com/Serial-ATA/lofty-rs/pull/298))
+- **MP4**: The `dfLa` atom for FLAC streams will now be found, providing better properties ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/298))
 
 ### Removed
 - **ItemKey**: `ItemKey::InvolvedPeople`
@@ -31,37 +31,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.17.1] - 2023-11-26
 
 ### Changed
-- **MP4**: Skip over invalid `ilst` atoms by default ([issue](https://github.com/Serial-ATA/lofty-rs/issues/291)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/292))
+- **MP4**: Skip over invalid `ilst` atoms by default ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/291)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/292))
 
 ## [0.17.0] - 2023-11-14
 
 ### Added
-- **ParseOptions**: `ParseOptions::allocation_limit` to change the default allocation limit. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/276))
-- **ID3v2**: `Id3v2Tag::genres` to handle all the ways genres can be stored in `TCON` frames. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/286))
+- **ParseOptions**: `ParseOptions::allocation_limit` to change the default allocation limit. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/276))
+- **ID3v2**: `Id3v2Tag::genres` to handle all the ways genres can be stored in `TCON` frames. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/286))
 
 ### Changed
-- **VorbisComments**: When converting from `Tag` to `VorbisComments`, `ItemKey::Unknown`s will be checked for spec compliance. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/272))
-- **ID3v2**: Any trailing null terminators will be trimmed when reading Comment, Text, UserText, UserUrl, and UnsynchronizedText frames. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/275))
-- **Alloc**: The default allocation limit for any single tag item is now **16MB**. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/276))
-- **Probe**: `Probe::set_file_type()` will return the `Probe` to allow for builder-style usage. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/276))
+- **VorbisComments**: When converting from `Tag` to `VorbisComments`, `ItemKey::Unknown`s will be checked for spec compliance. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/272))
+- **ID3v2**: Any trailing null terminators will be trimmed when reading Comment, Text, UserText, UserUrl, and UnsynchronizedText frames. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/275))
+- **Alloc**: The default allocation limit for any single tag item is now **16MB**. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/276))
+- **Probe**: `Probe::set_file_type()` will return the `Probe` to allow for builder-style usage. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/276))
 
 ### Fixed
-- **MP4**: Verify atom identifiers fall within a subset of characters ([PR](https://github.com/Serial-ATA/lofty-rs/pull/267))
+- **MP4**: Verify atom identifiers fall within a subset of characters ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/267))
   - For a multitude of reasons, garbage data can be left at the end of an atom, resulting in Lofty attempting to
     parse it as another atom definition. As the specification is broad, there is no way for us to say *with certainty*
     that an identifier is invalid. Now we unfortunately have to guess the validity based on the commonly known atoms.
     For this, we follow [TagLib]'s [checks](https://github.com/taglib/taglib/blob/b40b834b1bdbd74593c5619e969e793d4d4886d9/taglib/mp4/mp4atom.cpp#L89).
-- **ID3v1**: No longer error on inputs shorter than 128 bytes (the length of an ID3v1 tag). ([PR](https://github.com/Serial-ATA/lofty-rs/pull/270))
-- **ID3v2**: No longer error on multi-value UTF-16 encoded text frames ([issue](https://github.com/Serial-ATA/lofty-rs/issues/265)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/284))
+- **ID3v1**: No longer error on inputs shorter than 128 bytes (the length of an ID3v1 tag). ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/270))
+- **ID3v2**: No longer error on multi-value UTF-16 encoded text frames ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/265)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/284))
 
 ### Removed
-- **MP4**: `Ilst::{track_total, disc_number, disc_total}` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/269))
+- **MP4**: `Ilst::{track_total, disc_number, disc_total}` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/269))
   - These existed prior to the methods on `Accessor`. There is no need to keep them around, as they behave the same.
 
 ## [0.16.1] - 2023-10-15
 
 ### Fixed
-- **MP4**: Skip unexpected or empty data atoms in ilst ([PR](https://github.com/Serial-ATA/lofty-rs/pull/261))
+- **MP4**: Skip unexpected or empty data atoms in ilst ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/261))
   - It is possible for an `ilst` item to have both empty `data` atoms and unexpected (likely vendor-specific) atoms other than `data`.
     These are both cases we can safely ignore unless using `ParsingMode::Strict`.
 
@@ -70,161 +70,161 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **ID3v2**:
   - Support for "RVA2", "OWNE", "ETCO", and "PRIV" frames through
-               `id3::v2::{RelativeVolumeAdjustmentFrame, OwnershipFrame, EventTimingCodesFrame, PrivateFrame}` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/236))
-  - `FrameId` now implements `Display` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/257))
-  - `Id3v2Tag::get_texts` for multi-value text frames ([PR](https://github.com/Serial-ATA/lofty-rs/pull/257))
-- **MP4** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/241)):
+               `id3::v2::{RelativeVolumeAdjustmentFrame, OwnershipFrame, EventTimingCodesFrame, PrivateFrame}` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/236))
+  - `FrameId` now implements `Display` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/257))
+  - `Id3v2Tag::get_texts` for multi-value text frames ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/257))
+- **MP4** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/241)):
   - `Atom::into_data`
   - `Atom::merge`
-- **OGG**: Support for reading "COVERART" fields, an old deprecated image storage format. ([issue](https://github.com/Serial-ATA/lofty-rs/issues/253)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/254))
+- **OGG**: Support for reading "COVERART" fields, an old deprecated image storage format. ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/253)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/254))
 
 ### Changed
 - **ID3v2**:
-  - Tag header parsing errors will be ignored unless using `ParsingMode::Strict` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/214))
+  - Tag header parsing errors will be ignored unless using `ParsingMode::Strict` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/214))
   - For spec compliance, `Id3v2Tag::insert` will now check for frames that are only meant to appear
-  in a tag once and remove them. Those frames are: "MCDI", "ETCO", "MLLT", "SYTC", "RVRB", "PCNT", "RBUF", "POSS", "OWNE", "SEEK", and "ASPI". ([PR](https://github.com/Serial-ATA/lofty-rs/pull/236))
-  - `Id3v2Tag::remove` will now take a `FrameId` rather than `&str` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/237))
-  - `FrameId` now implements `Into<Cow<'_, str>>`, making it possible to use it in `Frame::new` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/237))
-  - `Id3v2Tag` getters will now use `&FrameId` instead of `&str` for IDs ([PR](https://github.com/Serial-ATA/lofty-rs/pull/257))
-- **MP4** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/241)):
+  in a tag once and remove them. Those frames are: "MCDI", "ETCO", "MLLT", "SYTC", "RVRB", "PCNT", "RBUF", "POSS", "OWNE", "SEEK", and "ASPI". ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/236))
+  - `Id3v2Tag::remove` will now take a `FrameId` rather than `&str` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/237))
+  - `FrameId` now implements `Into<Cow<'_, str>>`, making it possible to use it in `Frame::new` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/237))
+  - `Id3v2Tag` getters will now use `&FrameId` instead of `&str` for IDs ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/257))
+- **MP4** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/241)):
   - `Ilst::remove` will now return all of the removed atoms
   - `Ilst::insert_picture` will now combine all pictures into a single `covr` atom
   - `Ilst::insert` will now merge atoms with the same identifier into a single atom
 - **FLAC**:
-  - Allow multiple Vorbis Comment blocks when not using `ParsingMode::Strict` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/242))
+  - Allow multiple Vorbis Comment blocks when not using `ParsingMode::Strict` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/242))
     - This is not allowed [by spec](https://xiph.org/flac/format.html#def_VORBIS_COMMENT), but is still possible
       to encounter in the wild. Now we will just take whichever tag happens to be latest in the stream and
       use it, they **will not be merged**.
-  - Allow picture types greater than 255 when not using `ParsingMode::Strict` ([issue](https://github.com/Serial-ATA/lofty-rs/issues/253)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/254))
+  - Allow picture types greater than 255 when not using `ParsingMode::Strict` ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/253)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/254))
     - This is not allowed [by spec](https://xiph.org/flac/format.html#metadata_block_picture), but has been encountered
       in the wild. Now we will just cap the picture type at 255.
 
 ### Fixed
-- **WavPack**: Custom sample rates will no longer be overwritten ([PR](https://github.com/Serial-ATA/lofty-rs/pull/244))
+- **WavPack**: Custom sample rates will no longer be overwritten ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/244))
   - When a custom sample rate (or multiplier) was encountered, it would accidentally be overwritten with 0, causing
     incorrect duration and bitrate values.
-- **APE**: Reading properties on older files will no longer error ([PR](https://github.com/Serial-ATA/lofty-rs/pull/245))
+- **APE**: Reading properties on older files will no longer error ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/245))
   - Older APE stream versions were not properly handled, leading to incorrect properties and errors.
-- **ID3v2**: Don't expect text frames to be null terminated ([issue](https://github.com/Serial-ATA/lofty-rs/issues/255)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/256))
+- **ID3v2**: Don't expect text frames to be null terminated ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/255)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/256))
 
 ## [0.15.0] - 2023-07-11
 
 ### Added
 - **ID3v2**:
-  - `Id3v2ErrorKind::UnsupportedFrameId` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/212))
-  - `FrameValue::KeyValue` for TIPL/TMCL frames ([PR](https://github.com/Serial-ATA/lofty-rs/pull/214))
-  - `Id3v2Tag::get_user_text`, `Id3v2Tag::insert_user_text`, and `Id3v2Tag::remove_user_text` for working with TXXX frames ([PR](https://github.com/Serial-ATA/lofty-rs/pull/232))
+  - `Id3v2ErrorKind::UnsupportedFrameId` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/212))
+  - `FrameValue::KeyValue` for TIPL/TMCL frames ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/214))
+  - `Id3v2Tag::get_user_text`, `Id3v2Tag::insert_user_text`, and `Id3v2Tag::remove_user_text` for working with TXXX frames ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/232))
 - **ParseOptions**: `ParseOptions::max_junk_bytes`, allowing the parser to sift through junk bytes to find required information, rather than
-                    immediately declare a file invalid. ([discussion](https://github.com/Serial-ATA/lofty-rs/discussions/219)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/227))
-- **WavPack**: `WavPackProperties` now contains the channel mask, accessible through `WavPackProperties::channel_mask()` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/230))
+                    immediately declare a file invalid. ([discussion](https://github.com/Serial-ATA/moosicbox_lofty-rs/discussions/219)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/227))
+- **WavPack**: `WavPackProperties` now contains the channel mask, accessible through `WavPackProperties::channel_mask()` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/230))
 - **AIFF**:
   - `AiffProperties` to hold additional AIFF-specific information
   - AIFC compression types are now exposed through `AiffCompressionType`
 
 ### Changed
 - **ID3v2**:
-  - `Id3v2ErrorKind::BadFrameId` now contains the frame ID ([PR](https://github.com/Serial-ATA/lofty-rs/pull/212))
-  - Bad frame IDs will no longer error when using `ParsingMode::{Relaxed, BestAttempt}`. The parser will now just move on to the next frame. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/214))
+  - `Id3v2ErrorKind::BadFrameId` now contains the frame ID ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/212))
+  - Bad frame IDs will no longer error when using `ParsingMode::{Relaxed, BestAttempt}`. The parser will now just move on to the next frame. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/214))
 - **APE**: The default track/disk number is now `0` to line up with ID3v2.
            This is only used when `set_{track, disk}_total` is used without a corresponding `set_{track, disk}`.
 - **VorbisComments**: When writing, items larger than `u32::MAX` will throw `ErrorKind::TooMuchData`, rather than be silently discarded.
 - **AIFF**: `AiffFile` will no longer use `FileProperties`. It now uses `AiffProperties`.
 
 ### Fixed
-- **APE**: Track/Disk number pairs are properly converted when writing ([issue](https://github.com/Serial-ATA/lofty-rs/issues/159)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/216))
-- **ID3v2**: TIPL/TMCL frames will no longer be read as a single terminated string ([issue](https://github.com/Serial-ATA/lofty-rs/pull/213)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/214))
-- **WavPack**: Multichannel files will no longer be marked as mono, supporting up to 4095 channels ([PR](https://github.com/Serial-ATA/lofty-rs/pull/230))
+- **APE**: Track/Disk number pairs are properly converted when writing ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/159)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/216))
+- **ID3v2**: TIPL/TMCL frames will no longer be read as a single terminated string ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/213)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/214))
+- **WavPack**: Multichannel files will no longer be marked as mono, supporting up to 4095 channels ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/230))
 
 ## [0.14.0] - 2023-06-08
 
 ### Added
-- **ParsingMode**: A new variant, `BestAttempt` will attempt to fill holes in otherwise valid tag items ([PR](https://github.com/Serial-ATA/lofty-rs/pull/205))
-- **🎉 Support for Musepack files** ([issue](https://github.com/Serial-ATA/lofty-rs/issues/199)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/200))
+- **ParsingMode**: A new variant, `BestAttempt` will attempt to fill holes in otherwise valid tag items ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/205))
+- **🎉 Support for Musepack files** ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/199)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/200))
 
 ### Changed
 - **Probe**: The default `ParsingMode` is now `ParsingMode::BestAttempt` (It was previously `ParsingMode::Strict`)
 - **Alloc**:
-  - ⚠️ Important ⚠️: The allocation limit for any single tag item is now **8MB** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/207)).
-                   This is not configurable yet ([issue](https://github.com/Serial-ATA/lofty-rs/issues/208)).
+  - ⚠️ Important ⚠️: The allocation limit for any single tag item is now **8MB** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/207)).
+                   This is not configurable yet ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/208)).
 
 ### Fixed
-- **MP4**: Fixed potential panic with malformed `plID` atoms ([issue](https://github.com/Serial-ATA/lofty-rs/issues/201)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/202))
+- **MP4**: Fixed potential panic with malformed `plID` atoms ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/201)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/202))
 
 ### Removed
-- **ID3v2**: Removed `id3::util::synchsafe::unsynch_content`. This has been replaced with [UnsynchronizedStream](https://docs.rs/lofty/latest/lofty/id3/v2/util/synchsafe/struct.UnsynchronizedStream.html).
+- **ID3v2**: Removed `id3::util::synchsafe::unsynch_content`. This has been replaced with [UnsynchronizedStream](https://docs.rs/moosicbox_lofty/latest/moosicbox_lofty/id3/v2/util/synchsafe/struct.UnsynchronizedStream.html).
 
 ## [0.13.0] - 2023-05-08
 
 ### Added
-- **Tag**/**ItemValue**: `Tag::remove_empty`/`ItemValue::is_empty` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/181))
-- **ItemKey**: Variants for MusicBrainz Release group/Artist/Release artist/Work IDs ([PR](https://github.com/Serial-ATA/lofty-rs/pull/182))
+- **Tag**/**ItemValue**: `Tag::remove_empty`/`ItemValue::is_empty` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/181))
+- **ItemKey**: Variants for MusicBrainz Release group/Artist/Release artist/Work IDs ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/182))
 - **ID3v2**:
-  - `ItemKey::{Barcode, CatalogNumber}` mappings ([PR](https://github.com/Serial-ATA/lofty-rs/pull/183))
-  - `SynchsafeInteger` trait to convert multiple integer types to/from their unsynchronized variants ([PR](https://github.com/Serial-ATA/lofty-rs/pull/187))
-  - Concrete types for all `FrameValue` variants ([PR](https://github.com/Serial-ATA/lofty-rs/pull/184))
-  - Support for the audio-text accessibility (ATXT) frame ([PR](https://github.com/Serial-ATA/lofty-rs/pull/188))
-- **VorbisComments**: `ItemKey::Barcode` mapping ([PR](https://github.com/Serial-ATA/lofty-rs/pull/183))
+  - `ItemKey::{Barcode, CatalogNumber}` mappings ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/183))
+  - `SynchsafeInteger` trait to convert multiple integer types to/from their unsynchronized variants ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/187))
+  - Concrete types for all `FrameValue` variants ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/184))
+  - Support for the audio-text accessibility (ATXT) frame ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/188))
+- **VorbisComments**: `ItemKey::Barcode` mapping ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/183))
 
 ### Changed
 - **ID3v1**: `ID3v1Tag` -> `Id3v1Tag`
 - **ID3v2**:
-  - `SyncTextInformation` no longer uses a String for its language ([PR](https://github.com/Serial-ATA/lofty-rs/pull/184))
+  - `SyncTextInformation` no longer uses a String for its language ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/184))
   - `FrameID` -> `FrameId`
   - `ID3v2Version` -> `Id3v2Version`
   - `ID3v2TagFlags` -> `Id3v2TagFlags`
   - `ID3v2Tag` -> `Id3v2Tag`
-  - There are fewer redundant, intermediate allocations ([PR](https://github.com/Serial-ATA/lofty-rs/pull/194))
-- **FileType/TagType/ItemKey**: All variants have been changed to UpperCamelCase ([PR](https://github.com/Serial-ATA/lofty-rs/pull/190))
+  - There are fewer redundant, intermediate allocations ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/194))
+- **FileType/TagType/ItemKey**: All variants have been changed to UpperCamelCase ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/190))
 - **MPEG**:
   - `MPEGFile` -> `MpegFile`
   - `MPEGProperties` -> `MpegProperties`
 
 ### Fixed
-- **ID3v2**: Compressed frames are now properly handled ([PR](https://github.com/Serial-ATA/lofty-rs/pull/191))
+- **ID3v2**: Compressed frames are now properly handled ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/191))
 
 ### Removed
 - **ID3v2**:
   - All uses of `ID3v2ErrorKind::Other` have been replaced with concrete errors
-  - `SyncTextInformation` and `GEOBInformation` have been flattened into their respective items ([PR](https://github.com/Serial-ATA/lofty-rs/pull/196))
+  - `SyncTextInformation` and `GEOBInformation` have been flattened into their respective items ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/196))
 
 ## [0.12.1] - 2023-04-10
 
 ### Fixed
-- **WAV**: Fix division by zero when reading the properties of an empty stream ([issue](https://github.com/Serial-ATA/lofty-rs/issues/174)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/175))
-- **ID3v2** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/177)):
+- **WAV**: Fix division by zero when reading the properties of an empty stream ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/174)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/175))
+- **ID3v2** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/177)):
   - Export `id3::v2::UniqueFileIdentifierFrame`
   - Export `id3::v2::Popularimeter`
 
 ## [0.12.0] - 2023-04-04
 
 ### Added
-- **Properties**: Expose channel mask (only supported for WAV and MPEG for now) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/155))
-- **ItemKey**: `InitialKey` mapping for Vorbis Comments ([PR](https://github.com/Serial-ATA/lofty-rs/pull/156))
-- **VorbisComments**: `VorbisComments::push` to allow for a non-replacing insertion ([PR](https://github.com/Serial-ATA/lofty-rs/pull/169))
-- **Tags**: `<Tag>::new()` as an alias for `<Tag>::default()` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/170))
-- **Picture**: `Picture::into_data()` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/173))
+- **Properties**: Expose channel mask (only supported for WAV and MPEG for now) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/155))
+- **ItemKey**: `InitialKey` mapping for Vorbis Comments ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/156))
+- **VorbisComments**: `VorbisComments::push` to allow for a non-replacing insertion ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/169))
+- **Tags**: `<Tag>::new()` as an alias for `<Tag>::default()` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/170))
+- **Picture**: `Picture::into_data()` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/173))
 
 ### Changed
 - **APE**/**ID3v1**/**ID3v2**/**Tag**:
-  - Allow empty strings as values instead of removing the corresponding item when empty ([PR](https://github.com/Serial-ATA/lofty-rs/pull/134))
-  - Separated the trait `SplitAndMergeTag` into `SplitTag` and `MergeTag` to prevent any unexpected or undefined behavior at runtime ([PR](https://github.com/Serial-ATA/lofty-rs/pull/143))
-- **VorbisComments** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/169)):
+  - Allow empty strings as values instead of removing the corresponding item when empty ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/134))
+  - Separated the trait `SplitAndMergeTag` into `SplitTag` and `MergeTag` to prevent any unexpected or undefined behavior at runtime ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/143))
+- **VorbisComments** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/169)):
   - Keys will now be verified according to spec before insertion
   - Getters will now case-insensitively search for keys
   - `TRACKNUM` will now be considered in the `Accessor::*track` methods
-- **Tags**: Method names are more consistent ([PR](https://github.com/Serial-ATA/lofty-rs/pull/171))
+- **Tags**: Method names are more consistent ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/171))
 
 ### Fixed
 - **ID3v2**:
-  - Fix conversion of user defined frames when using `Tag` writing interface ([issue](https://github.com/Serial-ATA/lofty-rs/issues/140)) ([PR](https://github.com/Serial-ATA/lofty-rs/issues/142))
-  - Fix writing of tag/disk numbers when using `Tag` writing interface ([issue](https://github.com/Serial-ATA/lofty-rs/issues/145)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/149))
-- **MP4** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/163)):
+  - Fix conversion of user defined frames when using `Tag` writing interface ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/140)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/142))
+  - Fix writing of tag/disk numbers when using `Tag` writing interface ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/145)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/149))
+- **MP4** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/163)):
   - Fix the incorrect size being written for newly created `moov.udta.meta` atoms
     - Previously, the 8 bytes for the size and identifier were not accounted for
   - The parser has been further restricted to avoid going out of bounds
     - This was only an issue if there was garbage data after the `moov` item *and* the parser had not yet found
       the `moov.udta` atom.
-- **WavPack** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/168)):
+- **WavPack** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/168)):
   - Fewer errors are suppressed
   - Metadata sub-blocks are now properly parsed
   - Bitrate calculation will now properly round down
@@ -233,16 +233,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **MP4**:
-  - The `InitialKey`, `ReplayGain*`, and "precise BPM" identifiers now have `ItemKey` mappings ([PR](https://github.com/Serial-ATA/lofty-rs/pull/93))
-  - `AtomIdent` now implements `TryFrom<ItemKey>` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/96))
-  - Added support for the vendor-supplied XID in files from the Apple iTunes store as `ItemKey::AppleXid`. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/98))
-  - Added support for `ItemKey::FlagCompilation` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/103))
+  - The `InitialKey`, `ReplayGain*`, and "precise BPM" identifiers now have `ItemKey` mappings ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/93))
+  - `AtomIdent` now implements `TryFrom<ItemKey>` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/96))
+  - Added support for the vendor-supplied XID in files from the Apple iTunes store as `ItemKey::AppleXid`. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/98))
+  - Added support for `ItemKey::FlagCompilation` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/103))
 - **Vorbis Comments**:
-  - Additional mappings for the `Label`, `Remixer`, and `EncodedBy` `ItemKey` variants ([PR](https://github.com/Serial-ATA/lofty-rs/pull/94))
+  - Additional mappings for the `Label`, `Remixer`, and `EncodedBy` `ItemKey` variants ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/94))
 - **ID3v2**: A new `id3v2_compression_support` feature to optionally depend on `flate2` for decompressing frames
 - **ItemKey**:
   - New Variants: `AppleXid`, `Director`, `Color`
-- **AudioFile**: `AudioFile::save_to{_path}` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/104))
+- **AudioFile**: `AudioFile::save_to{_path}` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/104))
 - **Files**: `<File>::set_{tag}`
 - **FLAC**: `FlacProperties`
   - Previously, FLAC files used `FileProperties`. `FlacProperties` was added to support getting the MD5 signature
@@ -253,13 +253,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **TagExt**: `TagExt::len`
 
 ### Changed
-- **MP4**: `AtomIdent` stores freeform identifiers as `Cow<str>` opposed to `String` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/95))
+- **MP4**: `AtomIdent` stores freeform identifiers as `Cow<str>` opposed to `String` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/95))
   - This allows freeform identifiers to be constructed in a const context.
-- **ID3v2**: `FrameID` now uses `Cow<str>` opposed to `String` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/102))
+- **ID3v2**: `FrameID` now uses `Cow<str>` opposed to `String` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/102))
 - **FLAC**: `FlacFile` now stores pictures separately from its `VorbisComments` tag
 
 ### Removed
-- **Metadata format features** ([PR](https://github.com/Serial-ATA/lofty-rs/pull/97)):
+- **Metadata format features** ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/97)):
   - All of the format-specific features have been removed, as they served no purpose. They used to bring in
     optional dependencies, but they have long since been removed.
 
@@ -267,7 +267,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Tag**: Handling of the `Year` tag has been improved.
   - Previously, setting a year with `Tag::set_year` required a `RecordingDate`. Now it will check if the format
   	supports the `Year` tag, and if not, then it will set a `RecordingDate`.
-- **OGG**: Writing of large packets would corrupt the stream ([issue](https://github.com/Serial-ATA/lofty-rs/issues/130)) ([PR](https://github.com/Serial-ATA/lofty-rs/issues/131))
+- **OGG**: Writing of large packets would corrupt the stream ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/130)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/131))
 
 ### ogg_pager
 See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
@@ -277,26 +277,26 @@ See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
 ### Added
 - **TagExt**: `TagExt::contains`
 - **Ilst**: `AtomData::Bool` for the various flag atoms such as `cpil`, `pcst`, etc.
-- **BoundTaggedFile**: A `TaggedFile` variant bound to a `File` handle. ([issue](https://github.com/Serial-ATA/lofty-rs/issues/73)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/80))
+- **BoundTaggedFile**: A `TaggedFile` variant bound to a `File` handle. ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/73)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/80))
 
 ### Changed
-- **Files**: Return the removed tag from `<File>::remove(TagType)` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/74))
+- **Files**: Return the removed tag from `<File>::remove(TagType)` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/74))
   - Previously, the only way to remove and take ownership of a tag was through `TaggedFile::take`.
     This was not possible when using a concrete type, such as `OpusFile`.
-- **TaggedFile**: Renamed `TaggedFile::take` to `TaggedFile::remove` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/74))
-- **lofty_attr**: The `lofty_attr::LoftyFile` derive proc macro is now exported as `lofty::LoftyFile`.
-- **TaggedFile**: All methods have been split out into a new trait, `TaggedFileExt`. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/80))
-- **Accessor**: All methods returning string values now return `Cow<str>`. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/83))
+- **TaggedFile**: Renamed `TaggedFile::take` to `TaggedFile::remove` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/74))
+- **moosicbox_lofty_attr**: The `moosicbox_lofty_attr::LoftyFile` derive proc macro is now exported as `moosicbox_lofty::LoftyFile`.
+- **TaggedFile**: All methods have been split out into a new trait, `TaggedFileExt`. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/80))
+- **Accessor**: All methods returning string values now return `Cow<str>`. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/83))
   - This is an unfortunate change that needed to be made in order to accommodate the handling of the different
     possible text separators between ID3v2 versions.
-- **ID3v2**: Support reading of duplicate tags ([issue](https://github.com/Serial-ATA/lofty-rs/issues/87)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/88))
+- **ID3v2**: Support reading of duplicate tags ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/87)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/88))
   - Previously, if we were reading a file and encountered an ID3v2 tag after having already read one,
     we would overwrite the last one, losing all of its information. Now we preserve all of the information,
     overwriting frames as necessary.
 
 ### Fixed
-- **ID3v2**: The `'/'` character is no longer used as a separator ([issue](https://github.com/Serial-ATA/lofty-rs/issues/82))
-- **MP4**: Stopped expecting certain flags for the `gnre` atom prior to upgrading it ([issue](https://github.com/Serial-ATA/lofty-rs/issues/84)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/85))
+- **ID3v2**: The `'/'` character is no longer used as a separator ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/82))
+- **MP4**: Stopped expecting certain flags for the `gnre` atom prior to upgrading it ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/84)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/85))
 
 ### ogg_pager
 See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
@@ -304,12 +304,12 @@ See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
 ## [0.9.0] - 2022-10-30
 
 ### Added
-- `ParseOptions` ([issue](https://github.com/Serial-ATA/lofty-rs/issues/50)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/70)):
+- `ParseOptions` ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/50)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/70)):
   - ⚠️ Important ⚠️: This update introduces `ParseOptions` to allow for finer grained control over error
       eagerness and other settings. Previously, when reading a file the only option available was
       `read_properties`, specified with a `bool` in `read_from{_path}`. This will now default to `true`,
       and can be overridden when using `Probe`.
-- **🎉 Support for AAC (ADTS) files** ([issue](https://github.com/Serial-ATA/lofty-rs/issues/58)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/71))
+- **🎉 Support for AAC (ADTS) files** ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/58)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/71))
 - **FileProperties**: `FileProperties::new`
 - Debug logging via the [log](https://crates.io/crates/log) crate for exposing recoverable errors.
 - **Error**: `ErrorKind::SizeMismatch`
@@ -317,40 +317,40 @@ See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
 ### Changed
 - **ID3v2**:
   - Frame/tag flags with optional additional data are now `Option<T>` instead of `(bool, T)`
-  - `id3::v2::TextEncoding` is now exported as `lofty::TextEncoding`
+  - `id3::v2::TextEncoding` is now exported as `moosicbox_lofty::TextEncoding`
 - `read_from{_path}` will no longer take a `bool` for reading properties, and will do it by default. To
   change this behavior, you must now use `Probe`.
 - **FileType**: `primary_tag_type` will no longer change its return depending on the enabled features.
-- **lofty_attr**: Simplified the `file_type` attribute:
-  - Before, you had to specify custom file types as `#[lofty(file_type = "Custom(\"MyFile\")")]`. Now
-    you can simply do `#[lofty(file_type = "MyFile")]` and it will infer the rest.
+- **moosicbox_lofty_attr**: Simplified the `file_type` attribute:
+  - Before, you had to specify custom file types as `#[moosicbox_lofty(file_type = "Custom(\"MyFile\")")]`. Now
+    you can simply do `#[moosicbox_lofty(file_type = "MyFile")]` and it will infer the rest.
 - **IFF**: `WAV` and `AIFF` items are no longer combined in the `iff` module. They are now separated
 			into their own modules at `iff::wav` and `iff::aiff` respectively.
 
 ### Fixed
-- **ID3v2**: Populate the `Populatimeter` field in the `ID3v2` -> `Tag` conversion ([issue](https://github.com/Serial-ATA/lofty-rs/issues/63)) ([PR](https://github.com/Serial-ATA/lofty-rs/pull/64))
+- **ID3v2**: Populate the `Populatimeter` field in the `ID3v2` -> `Tag` conversion ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/63)) ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/64))
 
 ### Removed
-- **lofty_attr**: The `#[lofty(always_present)]` attribute has been removed, and is now inferred.
+- **moosicbox_lofty_attr**: The `#[moosicbox_lofty(always_present)]` attribute has been removed, and is now inferred.
 
 ## [0.8.1] - 2022-09-09
 
 ### Added
-- **VorbisComments**: `VorbisComments::get_all`, same as `Tag::get_strings` ([issue](https://github.com/Serial-ATA/lofty-rs/issues/66))
+- **VorbisComments**: `VorbisComments::get_all`, same as `Tag::get_strings` ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/66))
 
 ### Fixed
 - **ID3v2**: Handle tag-wide unsynchronisation flag ([amberol#235](https://gitlab.gnome.org/World/amberol/-/issues/235))
-- **MP3**: Stop using partial frame headers ([PR](https://github.com/Serial-ATA/lofty-rs/pull/67))
+- **MP3**: Stop using partial frame headers ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/67))
 
 ## [0.8.0] - 2022-08-10
 
 ### Added
 - **A new file resolver system**:
-  - New module: `lofty::resolve`
+  - New module: `moosicbox_lofty::resolve`
   - With this, you will be able to create your own `FileType`s, while continuing
-    to use lofty's traditional API. Read the module docs for more info.
+    to use moosicbox_lofty's traditional API. Read the module docs for more info.
 - **A proc macro for file creation**:
-  - With the new `lofty_attr` crate, file creation has been simplified significantly.
+  - With the new `moosicbox_lofty_attr` crate, file creation has been simplified significantly.
     It is available for both internal and external usage.
 - **ID3v2**: Exposed internal functions `id3::v2::util::{synch_u32, unsynch_u32}`
 - **MP4**: `Atom::push_data`
@@ -359,14 +359,14 @@ See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
 - **TaggedFile**: `tag{_mut}` no longer takes a reference to `TagType`
 - **ID3v2**: `LanguageFrame`'s `lang` field has changed type - `String` -> `[u8; 3]`
 - **MP3**:
-  - Renamed `lofty::mp3` -> `lofty::mpeg`
+  - Renamed `moosicbox_lofty::mp3` -> `moosicbox_lofty::mpeg`
   - Renamed `MP3File` -> `MPEGFile`
   - Renamed `MP3Properties` -> `MPEGProperties`
 - **MP4**: `Atom::data` will now return all values
-- **Vorbis Comments**: Recognize lowercase `METADATA_BLOCK_PICTURE` as a picture ([issue](https://github.com/Serial-ATA/lofty-rs/issues/60))
+- **Vorbis Comments**: Recognize lowercase `METADATA_BLOCK_PICTURE` as a picture ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/60))
 
 ### Fixed
-- **ID3v2**: `ItemKey::InitialKey` now maps to `TKEY` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/61))
+- **ID3v2**: `ItemKey::InitialKey` now maps to `TKEY` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/61))
 
 ## [0.7.3] - 2022-07-22
 
@@ -450,14 +450,14 @@ This release mostly addresses issues uncovered by fuzzing, thanks to [@5225225](
 - **WAV**: Renamed `RiffInfoList` -> `RIFFInfoList`
 
 ### Fixed
-- **AIFF**: Fixed division by zero panic during property reading ([issue](https://github.com/Serial-ATA/lofty-rs/issues/56))
-- **ID3v2**: Support decoding UTF-16 T/WXXX frames with missing content BOM ([issue](https://github.com/Serial-ATA/lofty-rs/issues/53))
+- **AIFF**: Fixed division by zero panic during property reading ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/56))
+- **ID3v2**: Support decoding UTF-16 T/WXXX frames with missing content BOM ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/53))
 
 ## [0.6.3] - 2022-05-18
 
 ### Added
 - **MP4**:
-  - Support atoms with multiple values ([issue](https://github.com/Serial-ATA/lofty-rs/issues/48))
+  - Support atoms with multiple values ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/48))
   - `Atom::from_collection`
 
 ### Changed
@@ -466,12 +466,12 @@ This release mostly addresses issues uncovered by fuzzing, thanks to [@5225225](
   - Rather than error on empty items, they will just be discarded
 
 ### Fixed
-- **Pictures**: Treat "image/jpg" as `MimeType::Jpeg` ([PR](https://github.com/Serial-ATA/lofty-rs/pull/41))
+- **Pictures**: Treat "image/jpg" as `MimeType::Jpeg` ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/41))
 - **MP3**:
-  - Properly validate the contents of Xing/LAME/VBRI headers ([issue](https://github.com/Serial-ATA/lofty-rs/issues/42))
+  - Properly validate the contents of Xing/LAME/VBRI headers ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/42))
     - A header with any field zeroed out would result in a division by zero panic
   - Fix duration estimation for files with Xing headers without the necessary flags
-- **FLAC**: Fix property reading of zero-length files ([issue](https://github.com/Serial-ATA/lofty-rs/issues/46))
+- **FLAC**: Fix property reading of zero-length files ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/46))
 - **Vorbis Comments**: Fix reading of vendor strings with invalid mixed UTF-8 and UTF-16 encodings
 - **ID3v2**:
   - Fix reading of zero-size tags
@@ -479,17 +479,17 @@ This release mostly addresses issues uncovered by fuzzing, thanks to [@5225225](
     - For some reason, some apps write v2 frame IDs in otherwise valid v3 frames
   - Attempt to decode invalid `COMM` languages
 - **MP4**:
-  - Fix hang when reading invalid padding ([issue](https://github.com/Serial-ATA/lofty-rs/issues/44))
+  - Fix hang when reading invalid padding ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/44))
     - If invalid padding was encountered at the end of the file, the reader would get stuck in an infinite loop
       attempting to read zero size atoms
-  - Fallback to bitrate calculation from `mdat` when necessary ([issue](https://github.com/Serial-ATA/lofty-rs/issues/43))
+  - Fallback to bitrate calculation from `mdat` when necessary ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/43))
     - When reading a file that doesn't provide a valid bitrate or duration, a division by zero panic would occur.
       Now, it attempts to calculate the bitrate from the `mdat` atom.
 
 ## [0.6.2] - 2022-04-24
 
 ### Fixed
-- **MP3**: Fix panic when reading files with no MPEG frames ([issue](https://github.com/Serial-ATA/lofty-rs/issues/39))
+- **MP3**: Fix panic when reading files with no MPEG frames ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/39))
   - Attempting to read an MP3 file with `read_properties = true` would result in a panic if the file contained no
     MPEG frames
 
@@ -526,8 +526,8 @@ This release mostly addresses issues uncovered by fuzzing, thanks to [@5225225](
 - **Vorbis Comments**: Support non-PNG/JPEG images in `PictureInformation::from_picture`
   - The method still only supports PNG and JPEG, but rather than error when it encounters an unknown image, it will return
     `PictureInformation::default`
-- `lofty::read_from` will now wrap the `File` in a `BufReader`
-- **FLAC**: FLAC now has its own module at `lofty::flac`
+- `moosicbox_lofty::read_from` will now wrap the `File` in a `BufReader`
+- **FLAC**: FLAC now has its own module at `moosicbox_lofty::flac`
 - **ID3v2**: `FrameValue` is now `#[non_exhaustive]`
 - `TagType::remove_from` now works for ID3v2 tags in APE and FLAC files
   - This previously verified that the `FileType` supported the tag. It now has special exceptions for these formats to
@@ -606,12 +606,12 @@ See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
 - **MP4**: Variable-size integers are shrunk when writing
 
 ### Fixed
-- **MP4**: Panic in `Mp4File::read_from` ([commit](https://github.com/Serial-ATA/lofty-rs/commit/9e18616a6882c659ba2d5ca6bdad9bf41171135d))
+- **MP4**: Panic in `Mp4File::read_from` ([commit](https://github.com/Serial-ATA/moosicbox_lofty-rs/commit/9e18616a6882c659ba2d5ca6bdad9bf41171135d))
 - **WAV/AIFF**: Chunk reading now makes use of fallible allocation, preventing OOM
 - **ID3v2**: Text is properly encoded when writing
 - **ID3v2**: `MVNM` and `MVIN` frames are now treated as text frames
 - **ID3v2**: Text encodings are verified for V2 tags
-- **MP4**: `plID` atom is properly treated as a 64-bit signed integer ([issue](https://github.com/Serial-ATA/lofty-rs/issues/34))
+- **MP4**: `plID` atom is properly treated as a 64-bit signed integer ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/34))
 - **MP4**: `rate` and `rtng` now map to the correct `ItemKey`
 - **MP4**: Integer pairs are now written correctly
 - `TagType` and `FileType` are no longer taken by reference in any method
@@ -619,32 +619,32 @@ See [ogg_pager's changelog](ogg_pager/CHANGELOG.md).
 ### Removed
 - `ErrorKind::BadExtension`
 
-[Unreleased]: https://github.com/Serial-ATA/lofty-rs/compare/0.17.1...HEAD
-[0.17.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.17.0...0.17.1
-[0.17.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.16.1...0.17.0
-[0.16.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.16.0...0.16.1
-[0.16.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.15.0...0.16.0
-[0.15.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.14.0...0.15.0
-[0.14.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.13.0...0.14.0
-[0.13.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.12.1...0.13.0
-[0.12.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.12.0...0.12.1
-[0.12.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.11.0...0.12.0
-[0.11.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.10.0...0.11.0
-[0.10.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.9.0...0.10.0
-[0.9.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.8.1...0.9.0
-[0.8.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.8.0...0.8.1
-[0.8.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.7.3...0.8.0
-[0.7.3]: https://github.com/Serial-ATA/lofty-rs/compare/0.7.2...0.7.3
-[0.7.2]: https://github.com/Serial-ATA/lofty-rs/compare/0.7.1...0.7.2
-[0.7.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.7.0...0.7.1
-[0.7.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.6.3...0.7.0
-[0.6.3]: https://github.com/Serial-ATA/lofty-rs/compare/0.6.2...0.6.3
-[0.6.2]: https://github.com/Serial-ATA/lofty-rs/compare/0.6.1...0.6.2
-[0.6.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.6.0...0.6.1
-[0.6.0]: https://github.com/Serial-ATA/lofty-rs/compare/0.5.3...0.6.0
-[0.5.3]: https://github.com/Serial-ATA/lofty-rs/compare/0.5.2...0.5.3
-[0.5.2]: https://github.com/Serial-ATA/lofty-rs/compare/0.5.1...0.5.2
-[0.5.1]: https://github.com/Serial-ATA/lofty-rs/compare/0.5.0...0.5.1
-[0.5.0]: https://github.com/Serial-ATA/lofty-rs/compare/64f0eff...0.5.0
+[Unreleased]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.17.1...HEAD
+[0.17.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.17.0...0.17.1
+[0.17.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.16.1...0.17.0
+[0.16.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.16.0...0.16.1
+[0.16.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.15.0...0.16.0
+[0.15.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.14.0...0.15.0
+[0.14.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.13.0...0.14.0
+[0.13.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.12.1...0.13.0
+[0.12.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.12.0...0.12.1
+[0.12.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.11.0...0.12.0
+[0.11.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.10.0...0.11.0
+[0.10.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.9.0...0.10.0
+[0.9.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.8.1...0.9.0
+[0.8.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.8.0...0.8.1
+[0.8.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.7.3...0.8.0
+[0.7.3]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.7.2...0.7.3
+[0.7.2]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.7.1...0.7.2
+[0.7.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.7.0...0.7.1
+[0.7.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.6.3...0.7.0
+[0.6.3]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.6.2...0.6.3
+[0.6.2]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.6.1...0.6.2
+[0.6.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.6.0...0.6.1
+[0.6.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.5.3...0.6.0
+[0.5.3]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.5.2...0.5.3
+[0.5.2]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.5.1...0.5.2
+[0.5.1]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/0.5.0...0.5.1
+[0.5.0]: https://github.com/Serial-ATA/moosicbox_lofty-rs/compare/64f0eff...0.5.0
 
 [TagLib]: https://github.com/taglib/taglib

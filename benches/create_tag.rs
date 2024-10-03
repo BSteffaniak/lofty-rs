@@ -1,11 +1,11 @@
-use lofty::ape::ApeTag;
-use lofty::id3::v1::Id3v1Tag;
-use lofty::id3::v2::Id3v2Tag;
-use lofty::iff::aiff::AIFFTextChunks;
-use lofty::iff::wav::RIFFInfoList;
-use lofty::mp4::Ilst;
-use lofty::ogg::VorbisComments;
-use lofty::{Accessor, MimeType, Picture, PictureType, TagExt};
+use moosicbox_lofty::ape::ApeTag;
+use moosicbox_lofty::id3::v1::Id3v1Tag;
+use moosicbox_lofty::iff::aiff::AIFFTextChunks;
+use moosicbox_lofty::iff::wav::RIFFInfoList;
+use moosicbox_lofty::mp4::Ilst;
+use moosicbox_lofty::ogg::VorbisComments;
+use moosicbox_lofty::{Accessor, MimeType, Picture, PictureType, TagExt};
+use moosicbox_moosicbox_moosicbox_lofty::id3::v2::Id3v2Tag;
 
 use criterion::{criterion_group, criterion_main, Criterion};
 
@@ -42,8 +42,8 @@ fn bench_write(c: &mut Criterion) {
 		[
 			("AIFF Text Chunks", AIFFTextChunks, |tag| {}),
 			("APEv2", ApeTag, |tag| {
-				use lofty::ape::ApeItem;
-				use lofty::ItemValue;
+				use moosicbox_lofty::ape::ApeItem;
+				use moosicbox_lofty::ItemValue;
 
 				let picture = Picture::new_unchecked(
 					PictureType::CoverFront,
@@ -68,8 +68,8 @@ fn bench_write(c: &mut Criterion) {
 				);
 			}),
 			("ID3v2", Id3v2Tag, |tag| {
-				use lofty::id3::v2::{Frame, FrameFlags, TextInformationFrame};
-				use lofty::TextEncoding;
+				use moosicbox_lofty::id3::v2::{Frame, FrameFlags, TextInformationFrame};
+				use moosicbox_lofty::TextEncoding;
 
 				let picture = Picture::new_unchecked(
 					PictureType::CoverFront,
@@ -93,7 +93,7 @@ fn bench_write(c: &mut Criterion) {
 			}),
 			("ID3v1", Id3v1Tag, |tag| {}),
 			("MP4 Ilst", Ilst, |tag| {
-				use lofty::mp4::{Atom, AtomData, AtomIdent};
+				use moosicbox_lofty::mp4::{Atom, AtomData, AtomIdent};
 
 				let picture = Picture::new_unchecked(
 					PictureType::CoverFront,
@@ -112,7 +112,7 @@ fn bench_write(c: &mut Criterion) {
 				tag.insert(String::from("ISFT"), String::from(ENCODER));
 			}),
 			("Vorbis Comments", VorbisComments, |tag| {
-				use lofty::ogg::OggPictureStorage;
+				use moosicbox_lofty::ogg::OggPictureStorage;
 
 				let picture = Picture::new_unchecked(
 					PictureType::CoverFront,

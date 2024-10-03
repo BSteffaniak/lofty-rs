@@ -67,7 +67,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ParseOptions;
+	/// use moosicbox_lofty::ParseOptions;
 	///
 	/// let parsing_options = ParseOptions::new();
 	/// ```
@@ -88,7 +88,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ParseOptions;
+	/// use moosicbox_lofty::ParseOptions;
 	///
 	/// // By default, `read_picture` is enabled. Here, we don't want to read them.
 	/// let parsing_options = ParseOptions::new().read_picture(false);
@@ -103,7 +103,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ParseOptions;
+	/// use moosicbox_lofty::ParseOptions;
 	///
 	/// // By default, `read_properties` is enabled. Here, we don't want to read them.
 	/// let parsing_options = ParseOptions::new().read_properties(false);
@@ -120,7 +120,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ParseOptions;
+	/// use moosicbox_lofty::ParseOptions;
 	///
 	/// // By default, `use_custom_resolvers` is enabled. Here, we don't want to use them.
 	/// let parsing_options = ParseOptions::new().use_custom_resolvers(false);
@@ -135,7 +135,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{ParseOptions, ParsingMode};
+	/// use moosicbox_lofty::{ParseOptions, ParsingMode};
 	///
 	/// // By default, `parsing_mode` is ParsingMode::BestAttempt. Here, we need absolute correctness.
 	/// let parsing_options = ParseOptions::new().parsing_mode(ParsingMode::Strict);
@@ -153,7 +153,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ParseOptions;
+	/// use moosicbox_lofty::ParseOptions;
 	///
 	/// // I have files full of junk, I'll double the search window!
 	/// let parsing_options = ParseOptions::new().max_junk_bytes(2048);
@@ -174,7 +174,7 @@ impl ParseOptions {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ParseOptions;
+	/// use moosicbox_lofty::ParseOptions;
 	///
 	/// // I have files with gigantic images, I'll double the allocation limit!
 	/// let parsing_options = ParseOptions::new().allocation_limit(32 * 1024 * 1024);
@@ -200,9 +200,9 @@ impl ParseOptions {
 /// # Examples
 ///
 /// ```rust,no_run
-/// use lofty::{ParseOptions, ParsingMode, Probe};
+/// use moosicbox_lofty::{ParseOptions, ParsingMode, Probe};
 ///
-/// # fn main() -> lofty::Result<()> {
+/// # fn main() -> moosicbox_lofty::Result<()> {
 /// // We only want to read spec-compliant inputs
 /// let parsing_options = ParseOptions::new().parsing_mode(ParsingMode::Strict);
 /// let tagged_file = Probe::open("foo.mp3")?.options(parsing_options).read()?;
@@ -256,9 +256,9 @@ pub enum ParsingMode {
 /// open file.
 ///
 /// ```rust,no_run
-/// # use lofty::{LoftyError, Probe};
+/// # use moosicbox_lofty::{LoftyError, Probe};
 /// # fn main() -> Result<(), LoftyError> {
-/// use lofty::FileType;
+/// use moosicbox_lofty::FileType;
 ///
 /// let probe = Probe::open("path/to/my.mp3")?;
 ///
@@ -271,9 +271,9 @@ pub enum ParsingMode {
 /// When a path isn't available, or is unreliable, content-based detection is also possible.
 ///
 /// ```rust,no_run
-/// # use lofty::{LoftyError, Probe};
+/// # use moosicbox_lofty::{LoftyError, Probe};
 /// # fn main() -> Result<(), LoftyError> {
-/// use lofty::FileType;
+/// use moosicbox_lofty::FileType;
 ///
 /// // Our same path probe with a guessed file type
 /// let probe = Probe::open("path/to/my.mp3")?.guess_file_type()?;
@@ -287,9 +287,9 @@ pub enum ParsingMode {
 /// Or with another reader
 ///
 /// ```rust
-/// # use lofty::{LoftyError, Probe};
+/// # use moosicbox_lofty::{LoftyError, Probe};
 /// # fn main() -> Result<(), LoftyError> {
-/// use lofty::FileType;
+/// use moosicbox_lofty::FileType;
 /// use std::io::Cursor;
 ///
 /// static MAC_HEADER: &[u8; 3] = b"MAC";
@@ -316,11 +316,11 @@ impl<R: Read> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::Probe;
+	/// use moosicbox_lofty::Probe;
 	/// use std::fs::File;
 	/// use std::io::BufReader;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	/// let file = File::open(path)?;
 	/// let reader = BufReader::new(file);
@@ -345,11 +345,11 @@ impl<R: Read> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	/// use std::fs::File;
 	/// use std::io::BufReader;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let my_mp3_path = "tests/files/assets/minimal/full_test.mp3";
 	/// // We know the file is going to be an MP3,
 	/// // so we can skip the format detection
@@ -372,9 +372,9 @@ impl<R: Read> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let reader = std::io::Cursor::new(&[]);
 	/// let probe = Probe::new(reader);
 	///
@@ -390,9 +390,9 @@ impl<R: Read> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let reader = std::io::Cursor::new(&[]);
 	/// let mut probe = Probe::new(reader);
 	/// assert_eq!(probe.file_type(), None);
@@ -412,9 +412,9 @@ impl<R: Read> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{ParseOptions, Probe};
+	/// use moosicbox_lofty::{ParseOptions, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let reader = std::io::Cursor::new(&[]);
 	/// // By default, properties will be read.
 	/// // In this example, we want to turn this off.
@@ -434,9 +434,9 @@ impl<R: Read> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let reader = std::io::Cursor::new(&[]);
 	/// let probe = Probe::new(reader);
 	///
@@ -461,9 +461,9 @@ impl Probe<BufReader<File>> {
 	/// # Examples
 	///
 	/// ```rust,no_run
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// let probe = Probe::open("path/to/my.mp3")?;
 	///
 	/// // Guessed from the "mp3" extension, see `FileType::from_ext`
@@ -502,9 +502,9 @@ impl<R: Read + Seek> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	/// # let file = std::fs::File::open(path)?;
 	/// # let reader = std::io::BufReader::new(file);
@@ -641,9 +641,9 @@ impl<R: Read + Seek> Probe<R> {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, Probe};
+	/// use moosicbox_lofty::{FileType, Probe};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	/// # let file = std::fs::File::open(path)?;
 	/// # let reader = std::io::BufReader::new(file);
@@ -698,10 +698,10 @@ impl<R: Read + Seek> Probe<R> {
 /// # Examples
 ///
 /// ```rust
-/// use lofty::read_from;
+/// use moosicbox_lofty::read_from;
 /// use std::fs::File;
 ///
-/// # fn main() -> lofty::Result<()> {
+/// # fn main() -> moosicbox_lofty::Result<()> {
 /// # let path = "tests/files/assets/minimal/full_test.mp3";
 /// let mut file = File::open(path)?;
 ///
@@ -726,9 +726,9 @@ pub fn read_from(file: &mut File) -> Result<TaggedFile> {
 /// # Examples
 ///
 /// ```rust
-/// use lofty::read_from_path;
+/// use moosicbox_lofty::read_from_path;
 ///
-/// # fn main() -> lofty::Result<()> {
+/// # fn main() -> moosicbox_lofty::Result<()> {
 /// # let path = "tests/files/assets/minimal/full_test.mp3";
 /// let parsed_file = read_from_path(path)?;
 /// # Ok(()) }
@@ -744,7 +744,7 @@ where
 mod tests {
 	use crate::{FileType, Probe};
 
-	use lofty::ParseOptions;
+	use moosicbox_lofty::ParseOptions;
 	use std::fs::File;
 
 	#[test]

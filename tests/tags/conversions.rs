@@ -1,7 +1,7 @@
 // Tests for special case conversions
 
-use lofty::id3::v2::{CommentFrame, Frame, FrameFlags, FrameId, Id3v2Tag, UnsynchronizedTextFrame};
-use lofty::{ItemKey, Tag, TagType, TextEncoding};
+use moosicbox_lofty::id3::v2::{CommentFrame, Frame, FrameFlags, FrameId, Id3v2Tag, UnsynchronizedTextFrame};
+use moosicbox_lofty::{ItemKey, Tag, TagType, TextEncoding};
 use std::borrow::Cow;
 
 #[test]

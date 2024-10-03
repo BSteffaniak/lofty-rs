@@ -1,6 +1,6 @@
 use crate::get_reader;
-use lofty::error::ErrorKind;
-use lofty::PictureInformation;
+use moosicbox_lofty::error::ErrorKind;
+use moosicbox_lofty::PictureInformation;
 
 #[test]
 fn crash1() {

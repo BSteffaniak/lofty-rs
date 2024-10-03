@@ -1,9 +1,9 @@
 use crate::{set_artist, temp_file, verify_artist};
 use std::borrow::Cow;
 
-use lofty::id3::v2::{Frame, FrameFlags, FrameId, FrameValue, Id3v2Tag, KeyValueFrame};
-use lofty::mpeg::MpegFile;
-use lofty::{
+use moosicbox_lofty::id3::v2::{Frame, FrameFlags, FrameId, FrameValue, Id3v2Tag, KeyValueFrame};
+use moosicbox_lofty::mpeg::MpegFile;
+use moosicbox_lofty::{
 	Accessor, AudioFile, FileType, ItemKey, ItemValue, ParseOptions, Probe, Tag, TagExt, TagItem,
 	TagType, TaggedFileExt,
 };
@@ -328,7 +328,7 @@ fn read_and_write_tpil_frame() {
 		Frame::new(
 			"TIPL",
 			KeyValueFrame {
-				encoding: lofty::TextEncoding::UTF8,
+				encoding: moosicbox_lofty::TextEncoding::UTF8,
 				key_value_pairs: key_value_pairs.clone(),
 			},
 			FrameFlags::default(),

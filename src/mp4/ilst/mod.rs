@@ -19,7 +19,7 @@ use std::io::Write;
 use std::ops::Deref;
 use std::path::Path;
 
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 const ARTIST: AtomIdent<'_> = AtomIdent::Fourcc(*b"\xa9ART");
 const TITLE: AtomIdent<'_> = AtomIdent::Fourcc(*b"\xa9nam");
@@ -90,8 +90,8 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::Ilst;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::mp4::Ilst;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let ilst_tag = Ilst::new();
 	/// assert!(ilst_tag.is_empty());
@@ -105,8 +105,8 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::{AtomIdent, Ilst};
-	/// use lofty::Accessor;
+	/// use moosicbox_lofty::mp4::{AtomIdent, Ilst};
+	/// use moosicbox_lofty::Accessor;
 	///
 	/// let mut ilst = Ilst::new();
 	/// ilst.set_title(String::from("Foo title"));
@@ -132,7 +132,7 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::{Atom, AtomData, AtomIdent, Ilst};
+	/// use moosicbox_lofty::mp4::{Atom, AtomData, AtomIdent, Ilst};
 	///
 	/// const TITLE_IDENTIFIER: AtomIdent = AtomIdent::Fourcc(*b"\xa9nam");
 	///
@@ -173,8 +173,8 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::{Atom, AtomData, AtomIdent, Ilst};
-	/// use lofty::Accessor;
+	/// use moosicbox_lofty::mp4::{Atom, AtomData, AtomIdent, Ilst};
+	/// use moosicbox_lofty::Accessor;
 	///
 	/// const TITLE_IDENTIFIER: AtomIdent = AtomIdent::Fourcc(*b"\xa9nam");
 	///
@@ -200,8 +200,8 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::{Atom, AtomData, AtomIdent, Ilst};
-	/// use lofty::Accessor;
+	/// use moosicbox_lofty::mp4::{Atom, AtomData, AtomIdent, Ilst};
+	/// use moosicbox_lofty::Accessor;
 	///
 	/// const TITLE_IDENTIFIER: AtomIdent = AtomIdent::Fourcc(*b"\xa9nam");
 	///
@@ -248,8 +248,8 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::Ilst;
-	/// use lofty::{MimeType, Picture, PictureType, TagExt};
+	/// use moosicbox_lofty::mp4::Ilst;
+	/// use moosicbox_lofty::{MimeType, Picture, PictureType, TagExt};
 	///
 	/// let mut ilst = Ilst::new();
 	///
@@ -293,8 +293,8 @@ impl Ilst {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::mp4::Ilst;
-	/// use lofty::{MimeType, Picture, PictureType, TagExt};
+	/// use moosicbox_lofty::mp4::Ilst;
+	/// use moosicbox_lofty::{MimeType, Picture, PictureType, TagExt};
 	///
 	/// let mut ilst = Ilst::new();
 	///

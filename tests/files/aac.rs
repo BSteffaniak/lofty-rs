@@ -1,5 +1,5 @@
 use crate::{set_artist, temp_file, verify_artist};
-use lofty::{
+use moosicbox_lofty::{
 	Accessor, FileType, ItemKey, ItemValue, ParseOptions, Probe, TagExt, TagItem, TagType,
 	TaggedFileExt,
 };

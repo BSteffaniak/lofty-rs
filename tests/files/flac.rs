@@ -1,5 +1,5 @@
-use lofty::flac::FlacFile;
-use lofty::{Accessor, AudioFile, ParseOptions, ParsingMode};
+use moosicbox_lofty::flac::FlacFile;
+use moosicbox_lofty::{Accessor, AudioFile, ParseOptions, ParsingMode};
 
 use std::fs::File;
 use std::io::Seek;

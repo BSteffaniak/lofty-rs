@@ -9,7 +9,7 @@ use std::fs::File;
 use std::io::Write;
 use std::path::Path;
 
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 macro_rules! impl_accessor {
 	($($name:ident,)+) => {
@@ -113,8 +113,8 @@ impl Id3v1Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v1::Id3v1Tag;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::id3::v1::Id3v1Tag;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let id3v1_tag = Id3v1Tag::new();
 	/// assert!(id3v1_tag.is_empty());

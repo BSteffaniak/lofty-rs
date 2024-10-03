@@ -22,19 +22,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.0] - 2022-12-27
 
 ### Added
-- Support for reading packets with the new `Packets` struct. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/76))
-- `PageHeader` struct. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/76))
+- Support for reading packets with the new `Packets` struct. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/76))
+- `PageHeader` struct. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/76))
 
 ### Changed
 - The reading of OGG files has switched to using packets opposed to pages, making it more spec-compliant and efficient.
 - Most fields in `Page` have been separated out into the new `PageHeader` struct.
-- `paginate` now works with a collection of packets. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/79))
+- `paginate` now works with a collection of packets. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/79))
 
 ### Removed
 - Removed `Page::new`, now pages can only be created through `ogg_pager::paginate` or
-  `Packets::paginate`. ([PR](https://github.com/Serial-ATA/lofty-rs/pull/79))
+  `Packets::paginate`. ([PR](https://github.com/Serial-ATA/moosicbox_lofty-rs/pull/79))
 
 ## [0.3.1] - 2022-3-3
 
 ### Fixed
-- Segment tables are written correctly with data spanning multiple pages ([issue](https://github.com/Serial-ATA/lofty-rs/issues/37))
+- Segment tables are written correctly with data spanning multiple pages ([issue](https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/37))

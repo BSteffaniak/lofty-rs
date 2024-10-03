@@ -1,5 +1,5 @@
 use crate::oom_test;
-use lofty::ogg::OpusFile;
+use moosicbox_lofty::ogg::OpusFile;
 
 #[test]
 fn oom1() {

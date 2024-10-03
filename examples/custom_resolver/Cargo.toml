@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 lofty = { path = "../.." }
-lofty_attr = { path = "../../lofty_attr" }
+lofty_attr = { path = "../../moosicbox_lofty_attr" }

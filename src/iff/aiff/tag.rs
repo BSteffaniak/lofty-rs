@@ -12,7 +12,7 @@ use std::io::{Read, Seek, SeekFrom, Write};
 use std::path::Path;
 
 use byteorder::BigEndian;
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 /// Represents an AIFF `COMT` chunk
 ///
@@ -128,8 +128,8 @@ impl AIFFTextChunks {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::iff::aiff::AIFFTextChunks;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::iff::aiff::AIFFTextChunks;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let aiff_tag = AIFFTextChunks::new();
 	/// assert!(aiff_tag.is_empty());

@@ -26,7 +26,7 @@ use std::io::{Cursor, Write};
 use std::ops::Deref;
 use std::path::Path;
 
-use lofty_attr::tag;
+use moosicbox_lofty_attr::tag;
 
 const USER_DEFINED_TEXT_FRAME_ID: &str = "TXXX";
 const COMMENT_FRAME_ID: &str = "COMM";
@@ -131,8 +131,8 @@ impl Id3v2Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::Id3v2Tag;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::id3::v2::Id3v2Tag;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let id3v2_tag = Id3v2Tag::new();
 	/// assert!(id3v2_tag.is_empty());
@@ -199,8 +199,8 @@ impl Id3v2Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::{FrameId, Id3v2Tag};
-	/// use lofty::Accessor;
+	/// use moosicbox_lofty::id3::v2::{FrameId, Id3v2Tag};
+	/// use moosicbox_lofty::Accessor;
 	/// use std::borrow::Cow;
 	///
 	/// const TITLE_ID: FrameId<'_> = FrameId::Valid(Cow::Borrowed("TIT2"));
@@ -234,7 +234,7 @@ impl Id3v2Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::Id3v2Tag;
+	/// use moosicbox_lofty::id3::v2::Id3v2Tag;
 	///
 	/// let mut tag = Id3v2Tag::new();
 	///
@@ -272,8 +272,8 @@ impl Id3v2Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::Id3v2Tag;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::id3::v2::Id3v2Tag;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let mut tag = Id3v2Tag::new();
 	///
@@ -334,8 +334,8 @@ impl Id3v2Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::Id3v2Tag;
-	/// use lofty::TagExt;
+	/// use moosicbox_lofty::id3::v2::Id3v2Tag;
+	/// use moosicbox_lofty::TagExt;
 	///
 	/// let mut tag = Id3v2Tag::new();
 	/// assert!(tag.is_empty());
@@ -371,13 +371,13 @@ impl Id3v2Tag {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::id3::v2::{Frame, FrameFlags, FrameId, Id3v2Tag, TextInformationFrame};
-	/// use lofty::{TagExt, TextEncoding};
+	/// use moosicbox_lofty::id3::v2::{Frame, FrameFlags, FrameId, Id3v2Tag, TextInformationFrame};
+	/// use moosicbox_lofty::{TagExt, TextEncoding};
 	/// use std::borrow::Cow;
 	///
 	/// const MOOD_FRAME_ID: FrameId<'static> = FrameId::Valid(Cow::Borrowed("TMOO"));
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// let mut tag = Id3v2Tag::new();
 	/// assert!(tag.is_empty());
 	///
@@ -2028,7 +2028,7 @@ mod tests {
 		let mut tag = Id3v2Tag::default();
 		let encoding = TextEncoding::Latin1;
 		let flags = FrameFlags::default();
-		let custom_descriptor = "lofty-rs";
+		let custom_descriptor = "moosicbox_lofty-rs";
 
 		assert!(tag.comment().is_none());
 

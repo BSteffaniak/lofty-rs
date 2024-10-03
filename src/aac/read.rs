@@ -50,7 +50,7 @@ where
 
 				let id3v2 = parse_id3v2(reader, header, parse_mode)?;
 				if let Some(existing_tag) = &mut file.id3v2_tag {
-					// https://github.com/Serial-ATA/lofty-rs/issues/87
+					// https://github.com/Serial-ATA/moosicbox_lofty-rs/issues/87
 					// Duplicate tags should have their frames appended to the previous
 					for frame in id3v2.frames {
 						existing_tag.insert(frame);

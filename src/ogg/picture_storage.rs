@@ -54,7 +54,7 @@ pub trait OggPictureStorage: private::Sealed {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::{OggPictureStorage, VorbisComments};
+	/// use moosicbox_lofty::ogg::{OggPictureStorage, VorbisComments};
 	///
 	/// let mut tag = VorbisComments::default();
 	///
@@ -70,10 +70,10 @@ pub trait OggPictureStorage: private::Sealed {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::{VorbisComments, OggPictureStorage};
-	/// # use lofty::{Picture, PictureInformation, PictureType, MimeType};
+	/// use moosicbox_lofty::ogg::{VorbisComments, OggPictureStorage};
+	/// # use moosicbox_lofty::{Picture, PictureInformation, PictureType, MimeType};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let front_cover = Picture::new_unchecked(PictureType::CoverFront, Some(MimeType::Png), None, Vec::new());
 	/// # let front_cover_info = PictureInformation::default();
 	/// # let back_cover = Picture::new_unchecked(PictureType::CoverBack, Some(MimeType::Png), None, Vec::new());
@@ -118,10 +118,10 @@ pub trait OggPictureStorage: private::Sealed {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::{VorbisComments, OggPictureStorage};
-	/// # use lofty::{Picture, PictureType, MimeType, PictureInformation};
+	/// use moosicbox_lofty::ogg::{VorbisComments, OggPictureStorage};
+	/// # use moosicbox_lofty::{Picture, PictureType, MimeType, PictureInformation};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let front_cover = Picture::new_unchecked(PictureType::CoverFront, Some(MimeType::Png), None, Vec::new());
 	/// # let front_cover_info = PictureInformation::default();
 	/// let mut tag = VorbisComments::default();
@@ -145,10 +145,10 @@ pub trait OggPictureStorage: private::Sealed {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::ogg::{VorbisComments, OggPictureStorage};
-	/// # use lofty::{Picture, PictureType, MimeType, PictureInformation};
+	/// use moosicbox_lofty::ogg::{VorbisComments, OggPictureStorage};
+	/// # use moosicbox_lofty::{Picture, PictureType, MimeType, PictureInformation};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let front_cover = Picture::new_unchecked(PictureType::CoverFront, Some(MimeType::Png), None, Vec::new());
 	/// # let front_cover_info = PictureInformation::default();
 	/// # let back_cover = Picture::new_unchecked(PictureType::CoverBack, Some(MimeType::Png), None, Vec::new());

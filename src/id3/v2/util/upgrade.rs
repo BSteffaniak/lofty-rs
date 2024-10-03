@@ -7,7 +7,7 @@ use std::collections::HashMap;
 /// # Examples
 ///
 /// ```rust
-/// use lofty::id3::v2::upgrade_v2;
+/// use moosicbox_lofty::id3::v2::upgrade_v2;
 ///
 /// let old_title = "TT2";
 /// let new_title = upgrade_v2(old_title);
@@ -23,7 +23,7 @@ pub fn upgrade_v2(key: &str) -> Option<&'static str> {
 /// # Examples
 ///
 /// ```rust
-/// use lofty::id3::v2::upgrade_v3;
+/// use moosicbox_lofty::id3::v2::upgrade_v3;
 ///
 /// let old_involved_people_list = "IPLS";
 /// let new_involved_people_list = upgrade_v3(old_involved_people_list);

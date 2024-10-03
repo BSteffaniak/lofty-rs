@@ -1,5 +1,5 @@
 use crate::get_reader;
-use lofty::PictureInformation;
+use moosicbox_lofty::PictureInformation;
 
 #[test]
 fn crash1() {

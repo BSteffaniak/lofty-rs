@@ -39,11 +39,11 @@ pub trait AudioFile: Into<TaggedFile> {
 	/// # Examples
 	///
 	/// ```rust,no_run
-	/// use lofty::{AudioFile, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
-	/// let mut tagged_file = lofty::read_from_path(path)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path)?;
 	///
 	/// // Edit the tags
 	///
@@ -63,12 +63,12 @@ pub trait AudioFile: Into<TaggedFile> {
 	/// # Examples
 	///
 	/// ```rust,no_run
-	/// use lofty::{AudioFile, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, TaggedFileExt};
 	/// use std::fs::OpenOptions;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
-	/// let mut tagged_file = lofty::read_from_path(path)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path)?;
 	///
 	/// // Edit the tags
 	///
@@ -93,11 +93,11 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, TaggedFileExt};
+	/// use moosicbox_lofty::{FileType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// assert_eq!(tagged_file.file_type(), FileType::Mpeg);
 	/// # Ok(()) }
@@ -109,12 +109,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, TaggedFileExt};
+	/// use moosicbox_lofty::{FileType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // An MP3 file with 3 tags
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// let tags = tagged_file.tags();
 	///
@@ -130,11 +130,11 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// assert_eq!(tagged_file.primary_tag_type(), TagType::Id3v2);
 	/// # Ok(()) }
@@ -148,11 +148,11 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// assert!(tagged_file.supports_tag_type(TagType::Id3v2));
 	/// # Ok(()) }
@@ -166,12 +166,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file with an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// // An ID3v2 tag
 	/// let tag = tagged_file.tag(TagType::Id3v2);
@@ -187,12 +187,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file with an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// // An ID3v2 tag
 	/// let tag = tagged_file.tag(TagType::Id3v2);
@@ -212,12 +212,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file with an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// // An ID3v2 tag
 	/// let tag = tagged_file.primary_tag();
@@ -237,12 +237,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file with an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// // An ID3v2 tag
 	/// let tag = tagged_file.primary_tag_mut();
@@ -265,12 +265,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::TaggedFileExt;
+	/// use moosicbox_lofty::TaggedFileExt;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	/// // A file we know has tags
-	/// let mut tagged_file = lofty::read_from_path(path)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path)?;
 	///
 	/// // A tag of a (currently) unknown type
 	/// let tag = tagged_file.first_tag();
@@ -289,12 +289,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::TaggedFileExt;
+	/// use moosicbox_lofty::TaggedFileExt;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	/// // A file we know has tags
-	/// let mut tagged_file = lofty::read_from_path(path)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path)?;
 	///
 	/// // A tag of a (currently) unknown type
 	/// let tag = tagged_file.first_tag_mut();
@@ -315,12 +315,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{AudioFile, Tag, TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, Tag, TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file without an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	/// # let _ = tagged_file.remove(TagType::Id3v2); // sneaky
 	///
 	/// assert!(!tagged_file.contains_tag_type(TagType::Id3v2));
@@ -339,12 +339,12 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{AudioFile, TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file containing an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// assert!(tagged_file.contains_tag_type(TagType::Id3v2));
 	///
@@ -361,11 +361,11 @@ pub trait TaggedFileExt {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::TaggedFileExt;
+	/// use moosicbox_lofty::TaggedFileExt;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
-	/// let mut tagged_file = lofty::read_from_path(path)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path)?;
 	///
 	/// tagged_file.clear();
 	///
@@ -389,7 +389,7 @@ pub struct TaggedFile {
 
 impl TaggedFile {
 	#[doc(hidden)]
-	/// This exists for use in `lofty_attr`, there's no real use for this externally
+	/// This exists for use in `moosicbox_lofty_attr`, there's no real use for this externally
 	#[must_use]
 	pub const fn new(ty: FileType, properties: FileProperties, tags: Vec<Tag>) -> Self {
 		Self {
@@ -409,12 +409,12 @@ impl TaggedFile {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{AudioFile, FileType, TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, FileType, TagType, TaggedFileExt};
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_mp3 = "tests/files/assets/minimal/full_test.mp3";
 	/// // Read an MP3 file containing an ID3v2 tag
-	/// let mut tagged_file = lofty::read_from_path(path_to_mp3)?;
+	/// let mut tagged_file = moosicbox_lofty::read_from_path(path_to_mp3)?;
 	///
 	/// assert!(tagged_file.contains_tag_type(TagType::Id3v2));
 	///
@@ -528,14 +528,14 @@ impl From<BoundTaggedFile> for TaggedFile {
 /// For example:
 ///
 /// ```rust,no_run
-/// use lofty::{AudioFile, Tag, TagType, TaggedFileExt};
-/// # fn main() -> lofty::Result<()> {
+/// use moosicbox_lofty::{AudioFile, Tag, TagType, TaggedFileExt};
+/// # fn main() -> moosicbox_lofty::Result<()> {
 /// # let path = "tests/files/assets/minimal/full_test.mp3";
 ///
 /// // We create an empty tag
 /// let tag = Tag::new(TagType::Id3v2);
 ///
-/// let mut tagged_file = lofty::read_from_path(path)?;
+/// let mut tagged_file = moosicbox_lofty::read_from_path(path)?;
 ///
 /// // Push our empty tag into the TaggedFile
 /// tagged_file.insert_tag(tag);
@@ -551,9 +551,9 @@ impl From<BoundTaggedFile> for TaggedFile {
 /// However, when using `BoundTaggedFile`:
 ///
 /// ```rust,no_run
-/// use lofty::{AudioFile, BoundTaggedFile, ParseOptions, Tag, TagType, TaggedFileExt};
+/// use moosicbox_lofty::{AudioFile, BoundTaggedFile, ParseOptions, Tag, TagType, TaggedFileExt};
 /// use std::fs::OpenOptions;
-/// # fn main() -> lofty::Result<()> {
+/// # fn main() -> moosicbox_lofty::Result<()> {
 /// # let path = "tests/files/assets/minimal/full_test.mp3";
 ///
 /// // We create an empty tag
@@ -589,9 +589,9 @@ impl BoundTaggedFile {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{AudioFile, BoundTaggedFile, ParseOptions, Tag, TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, BoundTaggedFile, ParseOptions, Tag, TagType, TaggedFileExt};
 	/// use std::fs::OpenOptions;
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	///
 	/// // We'll need to open our file for reading *and* writing
@@ -620,9 +620,9 @@ impl BoundTaggedFile {
 	/// # Examples
 	///
 	/// ```rust,no_run
-	/// use lofty::{AudioFile, BoundTaggedFile, ParseOptions, Tag, TagType, TaggedFileExt};
+	/// use moosicbox_lofty::{AudioFile, BoundTaggedFile, ParseOptions, Tag, TagType, TaggedFileExt};
 	/// use std::fs::OpenOptions;
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path = "tests/files/assets/minimal/full_test.mp3";
 	///
 	/// // We'll need to open our file for reading *and* writing
@@ -746,7 +746,7 @@ impl FileType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, TagType};
+	/// use moosicbox_lofty::{FileType, TagType};
 	///
 	/// let file_type = FileType::Mpeg;
 	/// assert_eq!(file_type.primary_tag_type(), TagType::Id3v2);
@@ -779,7 +779,7 @@ impl FileType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::{FileType, TagType};
+	/// use moosicbox_lofty::{FileType, TagType};
 	///
 	/// let file_type = FileType::Mpeg;
 	/// assert!(file_type.supports_tag_type(TagType::Id3v2));
@@ -806,7 +806,7 @@ impl FileType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::FileType;
 	///
 	/// let extension = "mp3";
 	/// assert_eq!(FileType::from_ext(extension), Some(FileType::Mpeg));
@@ -850,7 +850,7 @@ impl FileType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::FileType;
 	/// use std::path::Path;
 	///
 	/// let path = Path::new("path/to/my.mp3");
@@ -878,11 +878,11 @@ impl FileType {
 	/// # Examples
 	///
 	/// ```rust
-	/// use lofty::FileType;
+	/// use moosicbox_lofty::FileType;
 	/// use std::fs::File;
 	/// use std::io::Read;
 	///
-	/// # fn main() -> lofty::Result<()> {
+	/// # fn main() -> moosicbox_lofty::Result<()> {
 	/// # let path_to_opus = "tests/files/assets/minimal/full_test.opus";
 	/// let mut file = File::open(path_to_opus)?;
 	///
