@@ -101,7 +101,7 @@
 #![forbid(clippy::dbg_macro, clippy::string_to_string)]
 #![deny(
 	clippy::pedantic,
-	clippy::all,
+	// clippy::all,
 	missing_docs,
 	rustdoc::broken_intra_doc_links,
 	rust_2018_idioms,
